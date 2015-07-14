@@ -1,0 +1,44 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
+
+.presentation {
+    padding: 20px 0px 700px;
+    background-image: url(../images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.presentation h1 {
+    margin-top: 80px;
+    font-family: 'Oswald', sans-serif;
+    text-align: center; 
+    font-size: 60px; 
+}
+
+.presentation h2 { 
+    margin-top: 40px;
+    font-family: 'Oswald', sans-serif;
+    text-align: center; 
+    font-size: 40px; 
+}
+
+.presentation .panel-default {
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 70%;
+}
+
+.navbar-default {
+    background-color: rgb(0, 151, 255);
+}
+
+.dataTables_filter, .dataTables_paginate, .dataTables_info {
+   text-align: right;
+}
+
+tbody td .btn {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
