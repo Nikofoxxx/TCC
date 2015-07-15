@@ -1,49 +1,9 @@
 module.exports = function(app) 
 {
-
 	var Politics = app.services.politics;
 
 	var PoliticsController = 
 	{
-		create: function(req, res)
-		{						
-			try
-			{	
-				var politicName = req.body.politicName;
-
-				Politics.getPoliticByName(politicName, function(politic)
-				{
-					if (politic) {
-
-						var params = { error: "Político já cadastrado na busca!" };
-
-						res.render('home/index', params);
-					}
-					
-					var newPolitic = { politic_name: req.body.politicName };
-
-					Politics.create(newPolitic, function(politic)
-					{			
-						if (politic) 
-						{
-							req.session.politic = politic;
-							
-							var params = { success: "Político cadastrado com sucesso!" };
-
-							res.render('home/index', params);
-						}
-					})					
-
-				});											
-								
-			}
-			catch(ex)
-			{
-				var params = { error: ex };
-
-				res.render('home/index', params);
-			}
-		},
 
 		getAll: function(req, res)
 		{			
@@ -64,18 +24,47 @@ module.exports = function(app)
 						});
 
 						res.end(JSON.stringify(array));
-
-					} else {
-						res.end();
-					}
+					} 
 				});											
 								
 			}
 			catch(ex)
 			{
-				var params = { "error": ex };
+				console.log(ex.message);
+				res.status(500).send("Problemas ao buscar todos os políticos!");
+			}
+		},
 
-				res.end(params);
+		createPolitic: function(req, res)
+		{						
+			try
+			{	
+				var politicName = req.body.name;
+
+				PoliticsController.checkIfPoliticExists(politicName, function (result){
+
+					if(result){
+						
+						res.status(500).send("Político já cadastrado na busca!");
+
+					}else{
+						
+						Politics.create(politicName, function (politic)
+						{			
+							if (politic != null) 
+							{
+								var successMessage = "Político cadastrado com sucesso!";
+
+								res.end(successMessage);
+							}
+						});
+					}	
+				});															
+			}
+			catch(ex)
+			{
+				console.log(ex.message);
+				res.status(500).send("Problemas ao cadastrar político na busca!");
 			}
 		},
 
@@ -83,24 +72,73 @@ module.exports = function(app)
 		{
 			try
 			{
-
 				var oldPolitic = req.body.oldName;
 				var newPolitic = req.body.newName;
 
-				Politics.update(oldPolitic, newPolitic, function (callback)
-				{
-					var successMessage = "Político editado com sucesso!";
+				PoliticsController.checkIfPoliticExists(newPolitic, function (result){
 
-					res.end(successMessage);
+					if(result){
+						
+						res.status(500).send("Político já existente na busca!");
+
+					}else{
+						
+						Politics.update(oldPolitic, newPolitic, function (politic)
+						{
+							if (politic != null) 
+							{
+								var successMessage = "Político editado com sucesso!";
+
+								res.end(successMessage);
+							}
+						});
+					}
 				});
 			}
 			catch(ex)
 			{
-				var params = { "error": ex };
+				console.log(ex.message);
+				res.status(500).send("Problemas ao editar o político!");
+			}
+		},
 
-				res.end(params);
+		checkIfPoliticExists: function(politicName, callback)
+		{
+			Politics.getPoliticByName(politicName, function (politic)
+			{
+				if(politic != null){
+					if (politic.length > 0) {
+						return callback(true);
+					}else{
+						return callback(false);
+					}	
+				}
+				
+			});
+		},
+
+		removePolitic: function(req, res)
+		{
+			try 
+			{
+				var politicName = req.body.name;
+
+				Politics.delete(politicName, function (politic)
+				{
+					if (politic != null) 
+					{
+						var successMessage = "Político deletado com sucesso!";
+
+						res.end(successMessage);
+					}
+				});
+			}
+			catch(ex){
+				console.log(ex.message);
+				res.status(500).send("Problemas ao deletar o político!");	
 			}
 		}
+
 	};
 	
 	return PoliticsController;
