@@ -48,35 +48,59 @@ var PoliticStatusScript = (function() {
 	};
 
 	renderEditButton = function(name){
-		var editBtn =  String.format("<button class='btn btn-default btn-xs' onClick='editPolitic({0});'>" + 
+		var editBtn =  String.format("<button class='btn btn-default btn-xs' onClick='getModalToEditPolitic({0});'>" + 
 						     		 "<i class='fa fa-pencil fa-lg'></i></button>", name);
 
 		return String.format("{0}", editBtn);
 	};
 
 	renderDeleteButton = function(name){
-		var deleteBtn =  String.format("<button class='btn btn-default btn-xs' onClick='removePolitic({0});'>" +
+		var deleteBtn =  String.format("<button class='btn btn-default btn-xs' onClick='getModalToRemovePolitic({0});'>" +
 						     		   "<i class='fa fa-trash-o fa-lg'></i></button>", name);
 
 		return String.format("{0}", deleteBtn);
 	};
 
-	editPolitic = function(name){
-		$("#divToEditPolitcModal").load("http://localhost:3000/editPoliticModal", function (res, status, req) {
+	getModalToCreatePolitic = function(){
+		$("#divToCreatePolitcModal").load("http://localhost:3000/createPoliticModal", function (res, status, req) {
 			if(status == "success"){
-				$("#editPolitcModal").modal('show');
-				$("#modalPoliticInput").val(name);
-				$("#modalPoliticInputHidden").val(name)
+				$("#createPolitcModal").modal('show');
 			}
 		});
 	};
 
-	removePolitic = function(data){
+	createPolitic = function(){
+		var politicName = $("#createModalInput").val();
+
+		var data = { 'name' : politicName };
+		$.ajax({
+			url: "http://localhost:3000/createPolitic",
+			data : data,
+			type: "POST",
+			success: function(result){
+				$("#createPolitcModal").modal('toggle');
+				refreshTable('#politicsGrid', 'http://localhost:3000/getAll', result);
+			},
+			error: function(result){
+				toastr.error(result.responseText);
+			}
+		});
+		
 	};
 
-	sendPoliticToEdit = function(){
-		var oldPoliticName = $("#modalPoliticInputHidden").val();
-		var newPoliticName = $("#modalPoliticInput").val();
+	getModalToEditPolitic = function(name){
+		$("#divToEditPolitcModal").load("http://localhost:3000/editPoliticModal", function (res, status, req) {
+			if(status == "success"){
+				$("#editPolitcModal").modal('show');
+				$("#editModalInput").val(name);
+				$("#editModalInputHidden").val(name);
+			}
+		});
+	};
+
+	editPolitic = function(){
+		var oldPoliticName = $("#editModalInputHidden").val();
+		var newPoliticName = $("#editModalInput").val();
 
 		var data = { 'oldName' : oldPoliticName, 'newName' : newPoliticName };
 		$.ajax({
@@ -88,11 +112,38 @@ var PoliticStatusScript = (function() {
 				refreshTable('#politicsGrid', 'http://localhost:3000/getAll', result);
 			},
 			error: function(result){
-				toastr.error(result);
+				toastr.error(result.responseText);
 			}
 		});
 		
-	}
+	};	
+
+	getModalToRemovePolitic = function(name){
+		$("#divToRemovePolitcModal").load("http://localhost:3000/removePoliticModal", function (res, status, req) {
+			if(status == "success"){
+				$("#deletePolitcModal").modal('show');
+				$("#removeModalInputHidden").val(name);
+			}
+		});
+	};
+
+	removePolitic = function(){
+		var politicName = $("#removeModalInputHidden").val();
+
+		var data = { 'name' : politicName };
+		$.ajax({
+			url: "http://localhost:3000/removePolitic",
+			data : data,
+			type: "POST",
+			success: function(result){
+				$("#deletePolitcModal").modal('toggle');
+				refreshTable('#politicsGrid', 'http://localhost:3000/getAll', result);
+			},
+			error: function(result){
+				toastr.error(result.responseText);
+			}
+		});
+	};
 
 	hideOrShowPoliticsGrid = function() {
 		if($(".panel-body").is(":visible")){
@@ -105,10 +156,11 @@ var PoliticStatusScript = (function() {
 			$("#toggleBtn").find("i").removeClass("fa fa-eye fa-lg");
 			$("#toggleBtn").find("i").addClass("fa fa-eye-slash fa-lg");
 		}
-	}
+	};
 
 	events = function() {
 		$("#toggleBtn").attr('onclick', 'hideOrShowPoliticsGrid();');
+		$("#createPolitic").attr('onclick', 'getModalToCreatePolitic();');
 	};
 	
 	init = function (){

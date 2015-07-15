@@ -29,7 +29,6 @@ module.exports = function(app)
 				.select('politic_name')
 				.exec(function(error, politic)
 				{
-			
 					if (error)
 						throw error;
 
@@ -42,8 +41,11 @@ module.exports = function(app)
 
 		create: function(politicName, callback) 
 		{
-		
-			Politics.create(politicName, function(error, politic) 
+			var query = { politic_name: politicName };
+
+			var document = new Politics(query);
+
+			document.save(function (error, politic) 
 			{
 				if(error)
 					throw error;				
@@ -51,6 +53,7 @@ module.exports = function(app)
 				callback(politic);
 			});			
 		},
+
 		update: function(oldPolitic, newPolitic, callback) 
 		{
 			var query = { politic_name : oldPolitic };
@@ -63,9 +66,19 @@ module.exports = function(app)
 				callback(politic);
 			});		
 		},
-		delete: function(politic) 
+
+		delete: function(politicName, callback) 
 		{
-			//TODO: 
+			var query = { politic_name: politicName };
+
+			Politics.findOneAndRemove(query, function(err, politic) {
+			  
+				if (err) 
+			  		throw err;
+			    	
+		    	callback(politic);
+
+			});		
 		}
 	};
 	
