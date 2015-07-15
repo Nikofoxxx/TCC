@@ -1,13 +1,6 @@
 var PoliticStatusScript = (function() {
 
 	//Private Methods
-	changeTransparencyOfNavbar = function(){
-		$(document).on('scroll', function (e) {
-    		var alpha = ($(document).scrollTop() / 550) + 0.6;
-    		$('.navbar-default').css('background-color', 'rgba(0, 151, 255,' + alpha + ')');
-		});
-	};
-
 	mountGrid = function (){
 
 		 $table = $('#politicsGrid');
@@ -159,13 +152,14 @@ var PoliticStatusScript = (function() {
 	};
 
 	events = function() {
+		$('.navbar-default').css('background-color', 'rgba(0, 30, 79, 0.7)');
 		$("#toggleBtn").attr('onclick', 'hideOrShowPoliticsGrid();');
 		$("#createPolitic").attr('onclick', 'getModalToCreatePolitic();');
+		$("#logo").attr('onclick', '$("html,body").animate({scrollTop:0}, "slow");');
 	};
 	
 	init = function (){
 		events();
-		changeTransparencyOfNavbar();
 		mountGrid();
 	};
 

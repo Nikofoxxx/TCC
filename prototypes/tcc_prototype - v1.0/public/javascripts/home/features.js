@@ -17,8 +17,8 @@ var Events = (function (){
         "hideEasing": "linear",
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
-}
-  };
+  }
+};
 
   refreshTable = function(tableId, urlData, message){
     $.getJSON(urlData, null, function( json )
