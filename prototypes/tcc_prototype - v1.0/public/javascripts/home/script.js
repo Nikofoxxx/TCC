@@ -153,9 +153,21 @@ var PoliticStatusScript = (function() {
 
 	events = function() {
 		$('.navbar-default').css('background-color', 'rgba(0, 30, 79, 0.7)');
+		setButtonEvents();
+		openWebSocket();
+	};
+
+	setButtonEvents = function(){
 		$("#toggleBtn").attr('onclick', 'hideOrShowPoliticsGrid();');
 		$("#createPolitic").attr('onclick', 'getModalToCreatePolitic();');
 		$("#logo").attr('onclick', '$("html,body").animate({scrollTop:0}, "slow");');
+	};
+
+	openWebSocket = function(){
+		var socket = io.connect('http://localhost:3000');
+		socket.on('data', function (data) {
+    		console.log(data); //TODO: Mostrar os dados do objetto na view
+    	});
 	};
 	
 	init = function (){

@@ -3,9 +3,9 @@ var express = require('express')
 	, app = express() //express
 	, load = require('express-load') //express load para organizar os codigos em pasta
 	, error = require('./middleware/error') //logica de verificação de erros
-	, mongoose = require('mongoose');
-//, server = require('http').createServer(app) //cria um servidor http passando o gerado pelo express
-//, io = require('socket.io').listen(server); //cria o io em cima do server http
+	, mongoose = require('mongoose')
+	, server = require('http').createServer(app) //cria um servidor http passando o gerado pelo express
+	, io = require('socket.io').listen(server); //cria o io em cima do server http
 //configurar o acesso ao banco
 global.db = mongoose.connect('mongodb://localhost/database',function(error){
 	if (error) { 
@@ -41,6 +41,13 @@ load('models')
     .then('routes')    
     .into(app);
 
-app.listen(3000, function(){
+server.listen(3000, function(){
     console.log('Politistatus Online!');
+});
+
+var SNData = app.controllers.socialNetworksData;
+
+io.on('connection', function (client) {
+	console.log('Cliente conectado!');
+	SNData.getUpdatedComments(client);
 });
