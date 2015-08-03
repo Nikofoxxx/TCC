@@ -1,14 +1,16 @@
 module.exports = function(app) 
 {
 
-	var Politics = app.models.politics;
+	var Users = app.models.users;
 
 	var PoliticsService = 
 	{
-		getAll: function(callback) 
+		getAllUserPolitics: function(login, callback) 
 		{
-			Politics.find(function(error, politics)
-				{
+			var query = { userName : login };
+
+			Users.find(query).select('user_keywords').exec(function(error, politics)
+			{
 			
 					if (error)
 						throw error;
@@ -17,16 +19,13 @@ module.exports = function(app)
 						callback(politics);
 
 					callback(null);
-				});				
+			});				
 		},
 
-		getPoliticByName: function(politicName, callback)
+		getPoliticByName: function(user, politicName, callback)
 		{
 
-			var query = { politic_name: politicName };
-	
-			Politics.find(query)
-				.select('politic_name')
+			Users.find( { $and: [ { userName: user }, { user_keywords: politicName } ] } )
 				.exec(function(error, politic)
 				{
 					if (error)
@@ -39,26 +38,25 @@ module.exports = function(app)
 				});						
 		},
 
-		create: function(politicName, callback) 
+		create: function(user, politicName, callback) 
 		{
-			var query = { politic_name: politicName };
+			Users.update( { userName: user }, { $push: { user_keywords: politicName } }, function(error, politic){
 
-			var document = new Politics(query);
-
-			document.save(function (error, politic) 
-			{
 				if(error)
-					throw error;				
+					throw error;			
 
-				callback(politic);
+				if(politic)
+					callback(politic);
+
+				callback(null);
+
 			});			
 		},
 
-		update: function(oldPolitic, newPolitic, callback) 
+		update: function(user, oldPolitic, newPolitic, callback) 
 		{
-			var query = { politic_name : oldPolitic };
-
-			Politics.update(query, { politic_name : newPolitic }, function(error, politic) 
+			Users.update({ userName: user, user_keywords:  oldPolitic }, 
+					     { $set: {"user_keywords.$": newPolitic } }, function(error, politic) 
 			{
 				if(error)
 					throw error;				
@@ -67,11 +65,9 @@ module.exports = function(app)
 			});		
 		},
 
-		delete: function(politicName, callback) 
+		delete: function(user, politicName, callback) 
 		{
-			var query = { politic_name: politicName };
-
-			Politics.findOneAndRemove(query, function(err, politic) {
+			Users.update( { userName: user }, { $pull: { user_keywords: politicName } }, function(err, politic) {
 			  
 				if (err) 
 			  		throw err;

@@ -1,8 +1,10 @@
 module.exports = function(app)
 {
-	var home = app.controllers.home;
-	app.get('/', home.index);
-	app.get('/createPoliticModal', home.createPolitic);	
-	app.get('/editPoliticModal', home.editPolitic);
-	app.get('/removePoliticModal', home.removePolitic);
+	var isLogged = require('./../middleware/isLogged')
+	, home = app.controllers.home;
+
+	app.get('/index', isLogged, home.index);
+	app.get('/createPoliticModal', isLogged, home.createPolitic);	
+	app.get('/editPoliticModal', isLogged, home.editPolitic);
+	app.get('/removePoliticModal', isLogged, home.removePolitic);
 };

@@ -5,7 +5,7 @@ var PoliticStatusScript = (function() {
 
 		 $table = $('#politicsGrid');
 			$table.dataTable({
-				"ajax": 'http://localhost:3000/getAll',
+				"ajax": '/getAll',
 				"sDom": 'Rfrtlip',
 				"bSort": false,
 
@@ -55,7 +55,7 @@ var PoliticStatusScript = (function() {
 	};
 
 	getModalToCreatePolitic = function(){
-		$("#divToCreatePolitcModal").load("http://localhost:3000/createPoliticModal", function (res, status, req) {
+		$("#divToCreatePolitcModal").load("/createPoliticModal", function (res, status, req) {
 			if(status == "success"){
 				$("#createPolitcModal").modal('show');
 			}
@@ -67,12 +67,12 @@ var PoliticStatusScript = (function() {
 
 		var data = { 'name' : politicName };
 		$.ajax({
-			url: "http://localhost:3000/createPolitic",
+			url: "/createPolitic",
 			data : data,
 			type: "POST",
 			success: function(result){
 				$("#createPolitcModal").modal('toggle');
-				refreshTable('#politicsGrid', 'http://localhost:3000/getAll', result);
+				refreshTable('#politicsGrid', '/getAll', result);
 			},
 			error: function(result){
 				toastr.error(result.responseText);
@@ -82,7 +82,7 @@ var PoliticStatusScript = (function() {
 	};
 
 	getModalToEditPolitic = function(name){
-		$("#divToEditPolitcModal").load("http://localhost:3000/editPoliticModal", function (res, status, req) {
+		$("#divToEditPolitcModal").load("/editPoliticModal", function (res, status, req) {
 			if(status == "success"){
 				$("#editPolitcModal").modal('show');
 				$("#editModalInput").val(name);
@@ -97,12 +97,12 @@ var PoliticStatusScript = (function() {
 
 		var data = { 'oldName' : oldPoliticName, 'newName' : newPoliticName };
 		$.ajax({
-			url: "http://localhost:3000/editPolitic",
+			url: "/editPolitic",
 			data : data,
 			type: "POST",
 			success: function(result){
 				$("#editPolitcModal").modal('toggle');
-				refreshTable('#politicsGrid', 'http://localhost:3000/getAll', result);
+				refreshTable('#politicsGrid', '/getAll', result);
 			},
 			error: function(result){
 				toastr.error(result.responseText);
@@ -112,7 +112,7 @@ var PoliticStatusScript = (function() {
 	};	
 
 	getModalToRemovePolitic = function(name){
-		$("#divToRemovePolitcModal").load("http://localhost:3000/removePoliticModal", function (res, status, req) {
+		$("#divToRemovePolitcModal").load("/removePoliticModal", function (res, status, req) {
 			if(status == "success"){
 				$("#deletePolitcModal").modal('show');
 				$("#removeModalInputHidden").val(name);
@@ -125,12 +125,12 @@ var PoliticStatusScript = (function() {
 
 		var data = { 'name' : politicName };
 		$.ajax({
-			url: "http://localhost:3000/removePolitic",
+			url: "/removePolitic",
 			data : data,
 			type: "POST",
 			success: function(result){
 				$("#deletePolitcModal").modal('toggle');
-				refreshTable('#politicsGrid', 'http://localhost:3000/getAll', result);
+				refreshTable('#politicsGrid', '/getAll', result);
 			},
 			error: function(result){
 				toastr.error(result.responseText);

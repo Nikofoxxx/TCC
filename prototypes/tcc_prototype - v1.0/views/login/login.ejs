@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Politistatus</title>
+
+    <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrapValidator.css" rel="stylesheet">    
+    <link href="/stylesheets/login.css" rel="stylesheet">
+    <link href="/externals/toastr/toastr.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="/javascripts/common/jquery.js"></script>
+    <script type="text/javascript" src="/javascripts/common/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascripts/common/bootstrapValidator.min.js"></script>
+    <script type="text/javascript" src="/externals/toastr/toastr.js"></script>
+    <script type="text/javascript" src="/javascripts/login/login.js"></script>
+
+    <link rel="shortcut icon" href="../images/hammer.ico">
+  </head>
+  <body class="login-body">
+    <h1>Deseja saber a aprovação de seu representante nas redes sociais?</h1>
+    <h3>Cadastre-se!</h3>
+    <div class="admin-form">
+      <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="span12">
+            <!-- Widget starts -->
+            <div class="widget worange">
+              <!-- Widget head -->
+              <div class="widget-head">Login</div>
+              <div class="widget-content">
+                <div class="padd">
+                  <div class="controls" align="center">
+                    <h2>Politistatus</h2>
+                  </div>
+                  <hr>
+                  <br />
+                  <!-- Login form -->
+                  <form id="loginForm" action="/login" method="post">
+                    <fieldset>
+                      <!-- Login -->
+                      <div class="form-group">
+                        <input class="form-control" data-val="true" data-val-required=" " id="UserName" name="UserName" placeholder="Usuário" value="" type="text" maxlength="15" required>
+                      </div>
+                      <!-- Password -->
+                      <div class="form-group">
+                        <input class="form-control" data-val="true" data-val-required=" " id="Passwd" name="Passwd" placeholder="Senha" value="" type="password" required>
+                      </div>
+                      <div class="form-group">
+                        <div class="" align="center">
+                          <button type="submit" class="btn btn-lg btn-log btn-block">Acessar</button>
+                          <br />
+                          <button type="button" class="btn btn-lg btn-reg" onClick="getModalToRegister();">Cadastrar</button>
+                        </div>
+                        <br />
+                      </div>
+                    </fieldset>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div id="divToRegisterModal"></div>
+</body>
+</html>

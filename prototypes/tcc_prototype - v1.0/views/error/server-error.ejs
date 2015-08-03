@@ -1,22 +1,13 @@
-<% include ../common/header %>
-
-<style>
-	.serverError {
-		padding: 20px 0px 700px;
-	    background-image: url(../images/background.jpg);
-	    background-repeat: no-repeat;
-	    background-size: cover;	
-	}
-</style>
+<% include ../common/error-header %>
 
 <div class="serverError">
+	<h2>Politistatus: Erro 500</h2>
 	<div class="container well" style="margin-top: 100px;">
-		<h1>Ops.. algo deu errado aqui!</h1>
+		<h1>Ops... Algo de errado aconteceu!</h1>
 
 		<h4>Esse erro foi reportado e estaremos corrigindo o
-		 mais breve possivel, clique <a href="/">aqui</a> 
+		 mais breve possível! Clique <a href="/">aqui</a> 
 		 para voltar a pagina anterior.</h4>
 
-		<h5>Erro: <%- error %> <h5>
 	</div>
 </div>

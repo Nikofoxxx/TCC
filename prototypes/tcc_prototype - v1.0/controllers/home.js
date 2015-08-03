@@ -2,8 +2,8 @@ module.exports = function(app)
 {
 	var HomeController = 
 	{
-		index: function(req,res) {		
-			res.render('home/index');
+		index: function(req,res) {	
+			res.render('home/index', { session: req.session.user });
 		},
 
 		createPolitic: function(req, res) {

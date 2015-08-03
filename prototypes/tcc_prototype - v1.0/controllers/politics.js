@@ -9,7 +9,9 @@ module.exports = function(app)
 		{			
 			try
 			{	
-				Politics.getAll(function (politics)
+				var user = req.session.user.userName;
+
+				Politics.getAllUserPolitics(user, function (politics)
 				{
 					if (politics != null) {
 						
@@ -18,9 +20,11 @@ module.exports = function(app)
 						};
 						
 						politics.forEach(function (item) {
-  							array.data.push({
-  								"politic_name" : item.politic_name
-  							});
+							item.user_keywords.forEach(function (keyword){
+								array.data.push({
+									"politic_name" : keyword
+								});
+							});
 						});
 
 						res.end(JSON.stringify(array));
@@ -39,17 +43,17 @@ module.exports = function(app)
 		{						
 			try
 			{	
+				var user = req.session.user.userName;
 				var politicName = req.body.name;
 
-				PoliticsController.checkIfPoliticExists(politicName, function (result){
+				PoliticsController.checkIfPoliticExists(user, politicName, function (result){
 
 					if(result){
 						
 						res.status(500).send("Político já cadastrado na busca!");
 
 					}else{
-						
-						Politics.create(politicName, function (politic)
+						Politics.create(user, politicName, function (politic)
 						{			
 							if (politic != null) 
 							{
@@ -72,10 +76,11 @@ module.exports = function(app)
 		{
 			try
 			{
+				var user = req.session.user.userName;
 				var oldPolitic = req.body.oldName;
 				var newPolitic = req.body.newName;
 
-				PoliticsController.checkIfPoliticExists(newPolitic, function (result){
+				PoliticsController.checkIfPoliticExists(user, newPolitic, function (result){
 
 					if(result){
 						
@@ -83,7 +88,7 @@ module.exports = function(app)
 
 					}else{
 						
-						Politics.update(oldPolitic, newPolitic, function (politic)
+						Politics.update(user, oldPolitic, newPolitic, function (politic)
 						{
 							if (politic != null) 
 							{
@@ -102,18 +107,15 @@ module.exports = function(app)
 			}
 		},
 
-		checkIfPoliticExists: function(politicName, callback)
+		checkIfPoliticExists: function(user, politicName, callback)
 		{
-			Politics.getPoliticByName(politicName, function (politic)
+			Politics.getPoliticByName(user, politicName, function (politics)
 			{
-				if(politic != null){
-					if (politic.length > 0) {
+				if(politics != null){
+					if(politics.length > 0)
 						return callback(true);
-					}else{
-						return callback(false);
-					}	
+					return callback(false);
 				}
-				
 			});
 		},
 
@@ -121,9 +123,10 @@ module.exports = function(app)
 		{
 			try 
 			{
+				var user = req.session.user.userName;
 				var politicName = req.body.name;
 
-				Politics.delete(politicName, function (politic)
+				Politics.delete(user, politicName, function (politic)
 				{
 					if (politic != null) 
 					{
