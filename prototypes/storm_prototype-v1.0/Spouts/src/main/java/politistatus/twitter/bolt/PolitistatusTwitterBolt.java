@@ -34,33 +34,29 @@ public class PolitistatusTwitterBolt extends BaseBasicBolt {
 
 private static final long serialVersionUID = 1L;
 
-private PolitistatusDatabase database;
-  
+
   public PolitistatusTwitterBolt() throws UnknownHostException {
-}
+  }
 	
   @Override
   public void execute(Tuple tuple, BasicOutputCollector collector) {
 	  
 	  Status status = (Status) tuple.getValueByField("tweet");
+	  
 	  System.out.println(status);
 	  
-	  try {
-		BasicDBObject document = new BasicDBObject();
-		database = new PolitistatusDatabase();
-		
-		  document.put("name", status.getUser().getName());
-		  document.put("screen_name", status.getUser().getScreenName());
-		  document.put("profile_image", status.getUser().getProfileImageURL());
-		  document.put("location", status.getUser().getLocation());
-		  document.put("date", status.getCreatedAt());
-		  document.put("comment", status.getText());
-		  document.put("followers_count", status.getUser().getFollowersCount());
-		  document.put("url", status.getUser().getURL());
-		  database.saveInDB(document);
-	} catch (UnknownHostException ex) {
-		System.out.println("Erro :" + ex.getMessage());
-	}
+	  BasicDBObject document = new BasicDBObject();
+	
+	  document.put("name", status.getUser().getName());
+	  document.put("screen_name", status.getUser().getScreenName());
+	  document.put("profile_image", status.getUser().getProfileImageURL());
+	  document.put("location", status.getUser().getLocation());
+	  document.put("date", status.getCreatedAt());
+	  document.put("comment", status.getText());
+	  document.put("followers_count", status.getUser().getFollowersCount());
+	  document.put("url", status.getUser().getURL());
+	  
+	  PolitistatusDatabase.getInstance().saveInDB(document);
   }
 
   @Override

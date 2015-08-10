@@ -22,6 +22,7 @@ import java.io.NotSerializableException;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 
+import politistatus.mongodb.PolitistatusDatabase;
 import politistatus.twitter.bolt.PolitistatusTwitterBolt;
 import politistatus.twitter.streaming.PolitistatusTwitterSpout;
 import backtype.storm.Config;
@@ -30,6 +31,7 @@ import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.utils.Utils;
 
 public class PolitistatusTwitterStream {        
+	
     public static void main(String[] args) throws UnknownHostException, NotSerializableException {
     	
         String consumerKey = args[0]; 
@@ -38,6 +40,8 @@ public class PolitistatusTwitterStream {
         String accessTokenSecret = args[3];
         String[] arguments = args.clone();
         String[] keyWords = Arrays.copyOfRange(arguments, 4, arguments.length);
+        
+        openDbConnection();
         
         TopologyBuilder builder = new TopologyBuilder();
         
@@ -53,6 +57,14 @@ public class PolitistatusTwitterStream {
         cluster.submitTopology("Politistatus-topology", conf, builder.createTopology());
         
         Utils.sleep(10000);
-//        cluster.shutdown();
+//      cluster.shutdown();
+    }
+    
+    private static void openDbConnection(){
+    	 try {
+			PolitistatusDatabase.getInstance().createDBConnection();
+		} catch (UnknownHostException ex) {
+			System.out.println("Erro ao conectar ao banco de dados: " + ex.getMessage());
+		}
     }
 }
