@@ -16,19 +16,22 @@
  * limitations under the License.
  */
 
-package twitter.streaming;
+package politistatus.twitter.streaming;
 
+import java.io.NotSerializableException;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 
+import politistatus.twitter.bolt.PolitistatusTwitterBolt;
+import politistatus.twitter.streaming.PolitistatusTwitterSpout;
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.utils.Utils;
-import twitter.bolt.PrinterBolt;
-import twitter.streaming.TwitterSampleSpout;
 
-public class PrintSampleStream {        
-    public static void main(String[] args) {
+public class PolitistatusTwitterStream {        
+    public static void main(String[] args) throws UnknownHostException, NotSerializableException {
+    	
         String consumerKey = args[0]; 
         String consumerSecret = args[1]; 
         String accessToken = args[2]; 
@@ -38,20 +41,18 @@ public class PrintSampleStream {
         
         TopologyBuilder builder = new TopologyBuilder();
         
-        builder.setSpout("twitter", new TwitterSampleSpout(consumerKey, consumerSecret,
+        builder.setSpout("twitter", new PolitistatusTwitterSpout(consumerKey, consumerSecret,
                                 accessToken, accessTokenSecret, keyWords));
-        builder.setBolt("print", new PrinterBolt())
+        builder.setBolt("print", new PolitistatusTwitterBolt())
                 .shuffleGrouping("twitter");
-                
-                
+                        
         Config conf = new Config();
-        
-        
+           
         LocalCluster cluster = new LocalCluster();
         
-        cluster.submitTopology("test", conf, builder.createTopology());
+        cluster.submitTopology("Politistatus-topology", conf, builder.createTopology());
         
         Utils.sleep(10000);
-        cluster.shutdown();
+//        cluster.shutdown();
     }
 }

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package twitter.streaming;
+package politistatus.twitter.streaming;
 
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -41,7 +41,7 @@ import backtype.storm.tuple.Values;
 import backtype.storm.utils.Utils;
 
 @SuppressWarnings("serial")
-public class TwitterSampleSpout extends BaseRichSpout {
+public class PolitistatusTwitterSpout extends BaseRichSpout {
 
 	SpoutOutputCollector _collector;
 	LinkedBlockingQueue<Status> queue = null;
@@ -52,7 +52,7 @@ public class TwitterSampleSpout extends BaseRichSpout {
 	String accessTokenSecret;
 	String[] keyWords;
 
-	public TwitterSampleSpout(String consumerKey, String consumerSecret,
+	public PolitistatusTwitterSpout(String consumerKey, String consumerSecret,
 			String accessToken, String accessTokenSecret, String[] keyWords) {
 		this.consumerKey = consumerKey;
 		this.consumerSecret = consumerSecret;
@@ -61,7 +61,7 @@ public class TwitterSampleSpout extends BaseRichSpout {
 		this.keyWords = keyWords;
 	}
 
-	public TwitterSampleSpout() {
+	public PolitistatusTwitterSpout() {
 		// TODO Auto-generated constructor stub
 	}
 
