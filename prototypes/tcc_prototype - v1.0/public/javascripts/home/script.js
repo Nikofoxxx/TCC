@@ -155,6 +155,8 @@ var PoliticStatusScript = (function() {
 		$('.navbar-default').css('background-color', 'rgba(0, 30, 79, 0.7)');
 		setButtonEvents();
 		openWebSocket();
+
+
 	};
 
 	setButtonEvents = function(){
@@ -166,8 +168,18 @@ var PoliticStatusScript = (function() {
 	openWebSocket = function(){
 		var socket = io.connect('http://localhost:3000');
 		socket.on('data', function (data) {
-    		console.log(data); //TODO: Mostrar os dados do objetto na view
+    		getTweet(data.id);
     	});
+	};
+
+	getTweet = function(id){
+		twttr.ready(function (twttr){
+
+			twttr.widgets.createTweet(
+				id,
+				document.getElementById('container')
+			);
+		});
 	};
 	
 	init = function (){

@@ -5,7 +5,7 @@ module.exports = function(app)
 	var dateToSearch = new Date().toISOString();
 	var dateToCompare = new Date();
 
-	var SNDataController = 
+	var SNDataController =
 	{
 		getUpdatedComments: function(client){
 			try
@@ -18,7 +18,7 @@ module.exports = function(app)
 							clearTimeout(queryComments);	
 							if(snData.length > 0){
 								snData.forEach(function (item) {
-		  							if(item.date > dateToCompare){
+		  							if(item.date >= dateToCompare){
 		  								console.log(item);
 		  								dateToCompare = item.date;
 		  								dateToSearch = item.date.toISOString();
@@ -38,7 +38,7 @@ module.exports = function(app)
 			catch(ex)
 			{
 				console.log(ex.message);
-				res.status(500).send("Problemas ao buscar todos comentários!");
+				res.status(500).send("Problemas ao buscar os comentários atualizados!");
 			}
 		}	
 	};

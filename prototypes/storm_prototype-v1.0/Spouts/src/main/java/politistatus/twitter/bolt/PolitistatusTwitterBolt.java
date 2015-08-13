@@ -46,17 +46,13 @@ private static final long serialVersionUID = 1L;
 	  System.out.println(status);
 	  
 	  BasicDBObject document = new BasicDBObject();
-	
-	  document.put("name", status.getUser().getName());
-	  document.put("screen_name", status.getUser().getScreenName());
-	  document.put("profile_image", status.getUser().getProfileImageURL());
+	  
+	  document.put("id", status.getId());
 	  document.put("location", status.getUser().getLocation());
 	  document.put("date", status.getCreatedAt());
-	  document.put("comment", status.getText());
-	  document.put("followers_count", status.getUser().getFollowersCount());
-	  document.put("url", status.getUser().getURL());
-	  
+
 	  PolitistatusDatabase.getInstance().saveInDB(document);
+
   }
 
   @Override
