@@ -7,4 +7,5 @@ module.exports = function(app)
 	app.get('/createPoliticModal', isLogged, home.createPolitic);	
 	app.get('/editPoliticModal', isLogged, home.editPolitic);
 	app.get('/removePoliticModal', isLogged, home.removePolitic);
+	app.get('/tweetsModal', isLogged, home.tweetsModal);
 };

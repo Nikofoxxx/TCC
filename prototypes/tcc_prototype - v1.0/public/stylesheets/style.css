@@ -79,3 +79,17 @@ tbody td .btn {
     text-align: center; 
     font-size: 60px;
 }
+
+#tweetsModal.modal-wide .modal-dialog {
+    width: 90%;
+}
+
+.separator {
+    position:absolute;
+    left:50%;
+    top:20%;
+    bottom:5%;
+    border-left:3px solid #dfdfdf;
+    border-radius: 10px;
+
+}

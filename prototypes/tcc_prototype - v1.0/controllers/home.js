@@ -16,6 +16,10 @@ module.exports = function(app)
 
 		removePolitic: function(req, res) {
 			res.render('home/shared/_deletePoliticPartialView.ejs');
+		},
+
+		tweetsModal: function(req, res){
+			res.render('home/shared/_tweetsModalPartialView.ejs');
 		}
 	};
 	return HomeController;

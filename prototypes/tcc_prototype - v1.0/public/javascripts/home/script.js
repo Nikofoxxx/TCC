@@ -1,5 +1,7 @@
 var PoliticStatusScript = (function() {
 
+	var politicsInGrid = [];
+
 	//Private Methods
 	mountGrid = function (){
 
@@ -29,7 +31,15 @@ var PoliticStatusScript = (function() {
                         	return renderDeleteButton(JSON.stringify(row.politic_name));
                      	}
                     }
-				]
+				],
+				"fnDrawCallback": function(oSettings) {
+					politicsInGrid = [];
+					if(oSettings.aoData.length > 0) {
+						for ( var i = 0; i < oSettings.aoData.length; i++) {
+							politicsInGrid.push(oSettings.aoData[i]._aData.politic_name);
+						}
+					}
+				}
 			});
 
 			var tableTools = new $.fn.dataTable.TableTools($table, {
@@ -151,24 +161,51 @@ var PoliticStatusScript = (function() {
 		}
 	};
 
-	events = function() {
-		$('.navbar-default').css('background-color', 'rgba(0, 30, 79, 0.7)');
-		setButtonEvents();
-		openWebSocket();
+	getTweetsModal = function(name){
+		$("#divToTweetsModal").load("/tweetsModal", function (res, status, req) {
+			if(status == "success"){
+				insertNavTabsInTweetsModal();
+				$("#tweetsModal").modal('show');
+			}
+		});
+	};
 
+	insertNavTabsInTweetsModal = function(){
+		if(politicsInGrid.length == 1){
+			$("#tabs").html(String.format('<ul class="nav nav-tabs"><li class="active">' +
+				'<a href="#tab0" data-toggle="tab">{0}</a></li></ul>',
+				politicsInGrid[0]));
+		}else {
+			var content = getNavsToShowInModal();
 
+			$("#tabs").html(String.format('<ul class="nav nav-tabs"><li class="active">' +
+				'<a href="#tab0" data-toggle="tab">{0}</a></li>' +
+				'{1}</ul>', politicsInGrid[0], content));
+
+		}
+	};
+
+	getNavsToShowInModal = function(){
+		var htmlToAppend = "";
+
+		for(var i = 1; i < politicsInGrid.length; i++){
+			htmlToAppend += String.format('<li><a href="#tab{0}" data-toggle="tab">{1}</a></li>', i, politicsInGrid[i]);
+		}
+
+		return String.format("{0}", htmlToAppend);
 	};
 
 	setButtonEvents = function(){
 		$("#toggleBtn").attr('onclick', 'hideOrShowPoliticsGrid();');
 		$("#createPolitic").attr('onclick', 'getModalToCreatePolitic();');
 		$("#logo").attr('onclick', '$("html,body").animate({scrollTop:0}, "slow");');
+		$("#twitterBtn").attr('onclick', 'getTweetsModal();')
 	};
 
 	openWebSocket = function(){
 		var socket = io.connect('http://localhost:3000');
 		socket.on('data', function (data) {
-    		getTweet(data.id);
+    		//getTweet(data.id);
     	});
 	};
 
@@ -181,7 +218,14 @@ var PoliticStatusScript = (function() {
 			);
 		});
 	};
-	
+
+	events = function() {
+		$('.navbar-default').css('background-color', 'rgba(0, 30, 79, 0.7)');
+
+		setButtonEvents();
+		openWebSocket();
+	};
+
 	init = function (){
 		events();
 		mountGrid();
