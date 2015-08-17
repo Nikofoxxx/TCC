@@ -81,15 +81,38 @@ tbody td .btn {
 }
 
 #tweetsModal.modal-wide .modal-dialog {
-    width: 90%;
+    width: 93%;
 }
 
 .separator {
     position:absolute;
-    left:50%;
+    left:49.85%;
     top:20%;
     bottom:5%;
     border-left:3px solid #dfdfdf;
     border-radius: 10px;
-
 }
+
+.container.well {
+    box-shadow: 0 0 1px 1px #4099FF;
+}
+
+.modal-font {
+    font-family: 'Oswald', sans-serif;
+}
+
+#left-container {
+    height: 283px;
+    background-image: url(../images/tweet-bg.jpg);
+    background-repeat: repeat;
+}
+
+#right-container {
+    height: 336px;
+    background-image: url(../images/tweet-bg.jpg);
+    background-repeat: repeat;
+    overflow: auto;
+}
+
+
+

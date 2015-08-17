@@ -205,7 +205,7 @@ var PoliticStatusScript = (function() {
 	openWebSocket = function(){
 		var socket = io.connect('http://localhost:3000');
 		socket.on('data', function (data) {
-    		//getTweet(data.id);
+    		getTweet(data.id);
     	});
 	};
 
@@ -214,12 +214,17 @@ var PoliticStatusScript = (function() {
 
 			twttr.widgets.createTweet(
 				id,
-				document.getElementById('container')
+				document.getElementById('right-container')
 			);
 		});
 	};
 
 	events = function() {
+
+		$('#sandbox-container .input-group.date').datepicker({
+			orientation: "bottom left"
+		});
+
 		$('.navbar-default').css('background-color', 'rgba(0, 30, 79, 0.7)');
 
 		setButtonEvents();
