@@ -8,4 +8,5 @@ module.exports = function(app)
 	app.get('/editPoliticModal', isLogged, home.editPolitic);
 	app.get('/removePoliticModal', isLogged, home.removePolitic);
 	app.get('/tweetsModal', isLogged, home.tweetsModal);
+	app.get('/getTweetModalContent', isLogged, home.getTweetModalContent);
 };

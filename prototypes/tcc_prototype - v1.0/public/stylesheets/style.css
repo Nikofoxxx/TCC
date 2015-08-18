@@ -114,5 +114,18 @@ tbody td .btn {
     overflow: auto;
 }
 
+.noRegisters {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+}
+
+.noRegisters#leftNoRegisterMsg {
+    margin-left: 31%;
+}
+
+.noRegisters#rightNoRegisterMsg {
+    margin-left: 34%;
+}
+
 
 

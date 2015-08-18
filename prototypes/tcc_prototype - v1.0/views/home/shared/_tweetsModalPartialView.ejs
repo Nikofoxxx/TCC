@@ -7,56 +7,9 @@
             </div>
             <div class="modal-body">
                 <div class="tabbable">
-                    <div id="tabs"></div>
-                    <div class="tab-content" style="height: 400px;">
-                        <br/>
-                        <div class="col-md-6">
-                            <h4 class="modal-font">Filtrar por data:</h4>
-                            <div id="sandbox-container" class="container" style="padding-left: 0;">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div id="initialDate" class="input-group date">
-                                            <input type='text' class="form-control" placeholder="Data inicial" data-provide="datepicker"
-                                                   data-date-format="dd/mm/yyyy" data-date-language="pt-BR" />
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-calendar"></i>
-                                             </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div id="finalDate" class="input-group date">
-                                            <input type='text' class="form-control" placeholder="Data final" data-provide="datepicker"
-                                                   data-date-format="dd/mm/yyyy" data-date-language="pt-BR"/>
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-calendar"></i>
-                                             </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <a id="" class="btn btn-primary">Filtrar</a>
-                                        <a id="" class="btn btn-default" style="margin-left: 5px;">Limpar</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                            <div id="left-container" class="container well" style="max-width: 100%">
-                                <!-TODO -->
-                            </div>
-                        </div>
-
-                        <div class="separator"></div>
-
-                        <div class="col-md-6">
-                            <h4 class="modal-font">Live Stream:</h4>
-
-                            <div id="right-container" class="container well" style="max-width: 100%">
-
-                            </div>
-                        </div>
-
-                        <div class="tab-pane" id="tab1">
-                            <p>Data 2</p>
-                        </div>
+                    <ul id="tabs" class="nav nav-tabs"></ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" style="height: 400px;" id="tab0"></div>
                     </div>
                 </div>
             </div>
