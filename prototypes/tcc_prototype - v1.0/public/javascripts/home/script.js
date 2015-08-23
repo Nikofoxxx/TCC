@@ -227,17 +227,25 @@ var PoliticStatusScript = (function () {
     openWebSocket = function () {
         var socket = io.connect('http://localhost:3000');
         socket.on('data', function (data) {
-            getTweet(data.id);
+            getTweet(data);
         });
     };
 
-    getTweet = function (id) {
+    getTweet = function (tweet) {
+
         twttr.ready(function (twttr) {
 
-            twttr.widgets.createTweet(
-                id,
-                document.getElementById('right-container')
-            );
+            $("#tabs li a").each(function(){
+                if(tweet.keyword == $(this).text()) {
+                    var href = $(this).attr('href');
+                    var container = $(href).find("#right-container")[0];
+                    $(container).find("#rightNoRegisterMsg").hide();
+                    twttr.widgets.createTweet(
+                        tweet.id,
+                        container
+                    );
+                }
+            });
         });
     };
 
@@ -254,8 +262,8 @@ var PoliticStatusScript = (function () {
     };
 
     init = function () {
-        events();
         mountGrid();
+        events();
     };
 
     //Public Methods

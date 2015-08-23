@@ -5,7 +5,12 @@ var express = require('express')
 	, error = require('./middleware/error') //logica de verificação de erros
 	, mongoose = require('mongoose')
 	, server = require('http').createServer(app) //cria um servidor http passando o gerado pelo express
-	, io = require('socket.io').listen(server); //cria o io em cima do server http
+	, io = require('socket.io').listen(server)//cria o io em cima do server http
+	, MemoryStore = require('connect/middleware/session/memory')
+	, session_store = new MemoryStore()
+	, connect = require('connect');
+
+
 //configurar o acesso ao banco
 global.db = mongoose.connect('mongodb://localhost/database',function(error){
 	if (error) { 
@@ -14,6 +19,7 @@ global.db = mongoose.connect('mongodb://localhost/database',function(error){
 		console.log("Conectado ao Banco de Dados!");
 	}
 });
+
 //seta o caminho das views
 app.set('views', __dirname + '/views');
 //seta a view engine como ejs..
@@ -21,7 +27,7 @@ app.set('view engine', 'ejs');
 
 //habilita os cookies, session, urlencoder, override e uso das rotas
 app.use(express.cookieParser('ntalk'));
-app.use(express.session());
+app.use(express.session({store: session_store}));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
@@ -48,6 +54,15 @@ server.listen(3000, function(){
 var SNData = app.controllers.socialNetworksData;
 
 io.on('connection', function (client) {
-	console.log('Cliente conectado!');
-	SNData.getUpdatedComments(client);
+	var cookie_string = client.request.headers.cookie;
+	var parsed_cookies = connect.utils.parseCookie(cookie_string);
+	var connect_sid = parsed_cookies['connect.sid'];
+	var sid = connect_sid.substr(2, connect_sid.indexOf(".") - 2);
+
+	if (connect_sid) {
+		session_store.get(sid, function (error, session) {
+			console.log('Cliente conectado!');
+			SNData.getUpdatedComments(client, session.user.userName);
+		});
+	}
 });
