@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-2">
                 <div id="initialDate" class="input-group date">
-                    <input type='text' class="form-control" placeholder="Data inicial"
+                    <input type='text' id="firstDate" class="form-control" placeholder="Data inicial"
                            data-provide="datepicker"
                            data-date-format="dd/mm/yyyy" data-date-language="pt-BR"/>
                                             <span class="input-group-addon">
@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-2">
                 <div id="finalDate" class="input-group date">
-                    <input type='text' class="form-control" placeholder="Data final"
+                    <input id="secondDate" type='text' class="form-control" placeholder="Data final"
                            data-provide="datepicker"
                            data-date-format="dd/mm/yyyy" data-date-language="pt-BR"/>
                                             <span class="input-group-addon">
@@ -25,8 +25,8 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <a id="" class="btn btn-primary">Filtrar</a>
-                <a id="" class="btn btn-default" style="margin-left: 5px;">Limpar</a>
+                <a id="filterBtn" class="btn btn-primary" onClick="validateDatepickers();">Filtrar</a>
+                <a id="cleanBtn" class="btn btn-default" onClick="cleanDateFields();" style="margin-left: 5px;">Limpar</a>
             </div>
         </div>
     </div>

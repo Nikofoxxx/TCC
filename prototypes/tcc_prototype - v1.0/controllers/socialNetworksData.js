@@ -50,9 +50,39 @@ module.exports = function (app) {
                     SNDataController.getUpdatedComments(client, user);
                 }, 1000);
             }
-            catch (ex) {
+            catch (ex)
+            {
                 console.log(ex.message);
                 res.status(500).send("Problemas ao buscar os comentários atualizados!");
+            }
+        },
+
+        getCommentsByDate: function(req, res) {
+            try
+            {
+                var initialDate = new Date(req.body.initialDate).toISOString();
+                var finalDate = new Date(req.body.finalDate).toISOString();
+                var politic = req.body.politic;
+
+                SNData.getCommentsByDate(initialDate, finalDate, politic, function (comments) {
+                    if(comments != null) {
+                        if (comments.length > 0) {
+
+                           var array = [];
+
+                           comments.forEach(function(comment){ array.push(comment.tweet_id); });
+                           res.end(JSON.stringify(array));
+                        }
+                        else {
+                            res.status(500).send("Não foram encontrados tweets entre este intervalo de tempo!");
+                        }
+                    }
+                });
+            }
+            catch(ex)
+            {
+                console.log(ex.message);
+                res.status(500).send("Problemas ao buscar os comentários por data!");
             }
         }
     };

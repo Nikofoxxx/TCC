@@ -3,10 +3,11 @@ module.exports = function(app)
 	var Schema = require('mongoose').Schema;
 
    	var SNSchema = Schema({
-		  politic_name: { type: String },
-		  comment: { type: String },
-		  date: { type: Date, default: Date.now }
+		  tweet_id: { type: String },
+		  location: { type: String },
+		  date: { type: Date, default: Date.now },
+		  keyword: { type: String }
 	});
 
-	return db.model('social_networks_data', SNSchema);
+	return db.model('social_networks_datas', SNSchema);
 };

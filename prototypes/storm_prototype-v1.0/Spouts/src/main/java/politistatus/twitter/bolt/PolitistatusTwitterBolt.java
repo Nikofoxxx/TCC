@@ -32,7 +32,7 @@ public class PolitistatusTwitterBolt extends BaseBasicBolt {
 		for (String keyword : PolitistatusTwitterBolt.getInstance().getKeywords()) {
 			if(status.getText().contains(keyword)){
 				document = new BasicDBObject();
-				document.put("id", status.getId());
+				document.put("tweet_id", status.getId());
 				document.put("location", status.getUser().getLocation());
 				document.put("date", status.getCreatedAt());
 				document.put("keyword", keyword);

@@ -4,23 +4,26 @@ module.exports = function(app)
 
 	var SNDataService = 
 	{
-		//TODO: AJAX method fires here
-		getComments: function(callback){
-			SNData.find().exec(function(error, comments) {
-				if(error)
-					throw error;
+		getCommentsByDate: function(initialDate, finalDate, politic, callback){
 
-				if (comments)
-					callback(comments);
+			SNData.find({ $and: [ { date : { '$gte': initialDate, '$lte': finalDate }},
+				{ 'keyword' : politic }]})
+				.select('tweet_id')
+				.exec(function(error, comments){
+					if (error)
+						throw error;
 
-				callback(null);
-			});
+					if (comments)
+						callback(comments);
+
+					callback(null);
+				});
 		},
 
 		getUpdatedComments: function(politics, dateToSearch, callback){
 			SNData.find({ $and: [ { date : { '$gt': dateToSearch }},
-						{ 'keyword' : { $in : politics }}]}
-  				).exec(function(error, comments){
+				{ 'keyword' : { $in : politics }}]})
+				.exec(function(error, comments){
 					if (error)
 						throw error;
 

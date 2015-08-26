@@ -221,32 +221,7 @@ var PoliticStatusScript = (function () {
         $("#toggleBtn").attr('onclick', 'hideOrShowPoliticsGrid();');
         $("#createPolitic").attr('onclick', 'getModalToCreatePolitic();');
         $("#logo").attr('onclick', '$("html,body").animate({scrollTop:0}, "slow");');
-        $("#twitterBtn").attr('onclick', 'getTweetsModal();')
-    };
-
-    openWebSocket = function () {
-        var socket = io.connect('http://localhost:3000');
-        socket.on('data', function (data) {
-            getTweet(data);
-        });
-    };
-
-    getTweet = function (tweet) {
-
-        twttr.ready(function (twttr) {
-
-            $("#tabs li a").each(function(){
-                if(tweet.keyword == $(this).text()) {
-                    var href = $(this).attr('href');
-                    var container = $(href).find("#right-container")[0];
-                    $(container).find("#rightNoRegisterMsg").hide();
-                    twttr.widgets.createTweet(
-                        tweet.id,
-                        container
-                    );
-                }
-            });
-        });
+        $("#twitterBtn").attr('onclick', 'getTweetsModal();');
     };
 
     events = function () {
@@ -256,9 +231,7 @@ var PoliticStatusScript = (function () {
         });
 
         $('.navbar-default').css('background-color', 'rgba(0, 30, 79, 0.7)');
-
         setButtonEvents();
-        openWebSocket();
     };
 
     init = function () {
@@ -269,7 +242,6 @@ var PoliticStatusScript = (function () {
     //Public Methods
     return {
         init: init,
-        events: events
     };
 
 })();

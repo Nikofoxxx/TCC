@@ -105,6 +105,7 @@ tbody td .btn {
     height: 283px;
     background-image: url(../images/tweet-bg.jpg);
     background-repeat: repeat;
+    overflow: auto;
 }
 
 #right-container {
