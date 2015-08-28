@@ -1,1 +1,0 @@
-Após a fase de protótipos, aqui será feito o controle de versão do software.

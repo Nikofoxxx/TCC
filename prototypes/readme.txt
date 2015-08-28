@@ -1,1 +1,1 @@
-Aqui serão colocados os protótipos do sisteama.
+Aqui será feito o versionamento dos protótipos do sistema.
