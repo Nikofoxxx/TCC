@@ -1,6 +1,7 @@
 package politistatus.twitter.streaming;
 
 import java.net.UnknownHostException;
+import java.util.Timer;
 
 import politistatus.mongodb.PolitistatusDatabase;
 import politistatus.twitter.bolt.PolitistatusTwitterBolt;
@@ -35,7 +36,6 @@ public class PolitistatusTwitterStream {
 			System.out.println("Não existem políticos cadastrados no banco de dados!");
 		}
 
-		// cluster.shutdown();
 	}
 
 	private static void openDbConnection() {
@@ -55,7 +55,7 @@ public class PolitistatusTwitterStream {
 		return null;
 	}
 
-	private static void buildTopology(String consumerKey,
+	static void buildTopology(String consumerKey,
 			String consumerSecret, String accessToken,
 			String accessTokenSecret, String[] keyWords)
 			throws UnknownHostException {
@@ -69,11 +69,15 @@ public class PolitistatusTwitterStream {
 
 		Config conf = new Config();
 
-		LocalCluster cluster = new LocalCluster();
+		final LocalCluster cluster = new LocalCluster();
 
 		cluster.submitTopology("Politistatus-topology", conf,
 				builder.createTopology());
 
 		Utils.sleep(10000);
+		
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new PolitistatusTwitterStreamTask(consumerKey,
+				consumerSecret, accessToken,accessTokenSecret, cluster, timer) { }, 0, 5000);	
 	}
 }

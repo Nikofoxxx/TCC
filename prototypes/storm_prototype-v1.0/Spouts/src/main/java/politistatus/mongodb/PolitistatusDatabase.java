@@ -47,7 +47,7 @@ public class PolitistatusDatabase {
 			}
 		}
 		keywordsToDataMining = new String[keywords.size()];
-		keywordsToDataMining = keywords.toArray(keywordsToDataMining);
+		keywordsToDataMining = keywords.toArray(keywordsToDataMining);	
 		
 		return keywordsToDataMining;
 	}

@@ -92,6 +92,7 @@ public class PolitistatusTwitterSpout extends BaseRichSpout {
 		twitterStream.setOAuthConsumer(consumerKey, consumerSecret);
 		AccessToken token = new AccessToken(accessToken, accessTokenSecret);
 		twitterStream.setOAuthAccessToken(token);
+		_twitterStream = twitterStream;
 		
 		if (keyWords.length == 0) {
 			twitterStream.sample();
