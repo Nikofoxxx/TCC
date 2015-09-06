@@ -73,7 +73,7 @@ public class PolitistatusTwitterStream {
 
 		cluster.submitTopology("Politistatus-topology", conf,
 				builder.createTopology());
-
+		
 		Utils.sleep(10000);
 		
 		Timer timer = new Timer();
