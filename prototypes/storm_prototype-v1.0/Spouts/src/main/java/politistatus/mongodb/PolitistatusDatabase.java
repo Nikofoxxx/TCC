@@ -2,6 +2,10 @@ package politistatus.mongodb;
  
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -18,6 +22,7 @@ public class PolitistatusDatabase {
 	private DB db;
 	private DBCollection social_networks_collection;
 	private DBCollection users_collection;
+	private Set<String> cleanedKeywords;
 	private String[] keywordsToDataMining;
 	
 	public PolitistatusDatabase(){
@@ -36,18 +41,21 @@ public class PolitistatusDatabase {
 	
 	public String[] getAllUserKeywords(){
 		DBCursor cursor = users_collection.find();
-		BasicDBList keywordArray = new BasicDBList();
-		ArrayList<String> keywords = new ArrayList<String>();
+		BasicDBList dbKeywords = new BasicDBList();
+		ArrayList<String> keywordsList = new ArrayList<String>();
 		
 		while (cursor.hasNext()) {
-			keywordArray = (BasicDBList) (cursor.next().get("user_keywords"));
+			dbKeywords = (BasicDBList) (cursor.next().get("user_keywords"));
 			
-			for (Object dbOject : keywordArray) {
-				keywords.add((String)dbOject);
+			for (Object dbOject : dbKeywords) {
+				keywordsList.add((String)dbOject);
 			}
 		}
-		keywordsToDataMining = new String[keywords.size()];
-		keywordsToDataMining = keywords.toArray(keywordsToDataMining);	
+		
+		cleanedKeywords = new LinkedHashSet<String>(keywordsList);
+		
+		keywordsToDataMining = new String[cleanedKeywords.size()];
+		keywordsToDataMining = cleanedKeywords.toArray(keywordsToDataMining);	
 		
 		return keywordsToDataMining;
 	}
