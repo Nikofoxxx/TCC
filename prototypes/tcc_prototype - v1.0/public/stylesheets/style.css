@@ -12,7 +12,7 @@
 }
 
 .presentation {
-    padding: 20px 0px 700px;
+    padding: 20px 0px 200px;
     background-image: url(../images/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -38,7 +38,7 @@
     font-size: 60px; 
 }
 
-.presentation h2 { 
+.presentation h2 {
     margin-top: 40px;
     font-family: 'Oswald', sans-serif;
     text-align: center; 
@@ -128,5 +128,63 @@ tbody td .btn {
     margin-left: 34%;
 }
 
+.twitter-button-container{
+    margin-top: 15%;
+    height: 100px;
+    background-color: #FFF;
+    border-left: solid 17px rgb(0, 30, 79);
+    border-right: solid 17px rgb(0, 30, 79);
+}
 
+.twitter-button-container #twitterBtn {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 30px;
+}
 
+.twitter-button-container .left-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 30px;
+    color: rgb(0, 30, 79);
+    margin-top: 25px;
+}
+
+.twitter-button-container .right-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 19px;
+    color: rgb(0, 30, 79);
+    margin-top: 10px;
+}
+html, body, #mapDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+#mapDiv {
+    margin-top: 10%;
+    width: 700px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+footer {
+    height: 50px;
+    background-color: #292727;
+    color: #969696;
+    font-size: 13px;
+}
+
+footer .footer-left {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    color: #969696;
+    margin-top: 13px;
+    padding-left: 30px;
+}
+
+footer .footer-center {
+    margin-top: 14px;
+}

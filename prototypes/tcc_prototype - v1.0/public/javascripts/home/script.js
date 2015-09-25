@@ -151,23 +151,25 @@ var PoliticStatusScript = (function () {
     hideOrShowPoliticsGrid = function () {
         if ($(".panel-body").is(":visible")) {
             $(".panel-body").hide('slow');
-            $("#toggleBtn").find("i").removeClass("fa fa-eye-slash fa-lg");
-            $("#toggleBtn").find("i").addClass("fa fa-eye fa-lg");
+            $("#toggleBtn").find("i").removeClass("fa fa-eye-slash fa-lg").addClass("fa fa-eye fa-lg");
             $("#politicsGrid tbody tr").removeClass('active');
         } else {
             $(".panel-body").show('slow');
-            $("#toggleBtn").find("i").removeClass("fa fa-eye fa-lg");
-            $("#toggleBtn").find("i").addClass("fa fa-eye-slash fa-lg");
+            $("#toggleBtn").find("i").removeClass("fa fa-eye fa-lg").addClass("fa fa-eye-slash fa-lg");
         }
     };
 
-    getTweetsModal = function (name) {
-        $("#divToTweetsModal").load("/tweetsModal", function (res, status, req) {
-            if (status == "success") {
-                $("#tweetsModal").modal('show');
-                generateTweetsModalContent();
-            }
-        });
+    getTweetsModal = function () {
+        if(politicsInGrid.length > 0){
+            $("#divToTweetsModal").load("/tweetsModal", function (res, status, req) {
+                if (status == "success") {
+                    $("#tweetsModal").modal('show');
+                    generateTweetsModalContent();
+                }
+            });
+        }else{
+            toastr.warning("Não existe nenhum político cadastrado na busca! Por favor, cadastre ao menos um.");
+        }
     };
 
     generateTweetsModalContent = function () {

@@ -11,7 +11,7 @@
 
       <div id="content">
         <h1>Como estão nossos representantes?</h1>
-        <h2>Acompanhe como está a aprovação de seu representante nas redes sociais</h2>
+        <h2>Acompanhe como está a aprovação de seu representante no Twitter</h2>
 
         <div class="panel panel-default">
           <div class="panel-heading" style="font-weight: bold;">Políticos a serem buscados
@@ -31,11 +31,30 @@
           </div>
         </div>
       </div>
-      <a id="twitterBtn" class="twitter-share-button-mod" style="width: 125px; height: 40px">Ver Tweets</a>
+      <div class="twitter-button-container" style="width: 100%;">
+        <div class="row" style="margin-right: 0px; margin-left: 0px;">
+          <div class="col-md-5 left-text">Clique no botão ao lado para começar</div>
+          <div class="col-md-2">
+            <a id="twitterBtn" class="twitter-share-button-mod" style="width: 125px; height: 40px">Ver Tweets</a>
+          </div>
+          <div class="col-md-5 right-text"><i class="fa fa-quote-left"></i> Para a política o homem é um meio; para a
+            moral é um fim. A revolução do futuro será o triunfo da moral sobre a política. <i
+                    class="fa fa-quote-right"></i>
+            <br/>
+            <h6 style="font-style: italic;">Ernest Renan</h6>
+          </div>
+        </div>
+      </div>
+      <div id="mapDiv"></div>
+      <div class="row">
+
+      </div>
+      <a id="clearMakers" class="btn btn-primary">Limpar Marcadores</a>
       <div id="divToTweetsModal"></div>
       <div id="divToEditPolitcModal"></div>
       <div id="divToCreatePolitcModal"></div>
       <div id="divToRemovePolitcModal"></div>
     </div>
   </body>
+<% include ../common/footer %>
 </html>
