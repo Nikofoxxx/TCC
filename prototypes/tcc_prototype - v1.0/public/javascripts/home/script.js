@@ -219,7 +219,24 @@ var PoliticStatusScript = (function () {
         return String.format("{0}", htmlToAppend);
     };
 
+    getEditUserModal = function(){
+        $("#divToEditUserModal").load("/editUserModal", function (res, status, req) {
+            if (status == "success") {
+                $("#editUserModal").modal('show');
+
+                var name = $("#userPanel > label").text();
+                var firstName = name.split(" ")[0];
+                var lastName = name.split(" ")[1];
+
+                $("#firstName").val(firstName);
+                $("#lastName").val(lastName.substring(0, lastName.length - 1));
+                $("#userName").val($("#hiddenUserName").val());
+            }
+        });
+    };
+
     setButtonEvents = function () {
+        $("#editUserBtn").attr('onclick', 'getEditUserModal();');
         $("#toggleBtn").attr('onclick', 'hideOrShowPoliticsGrid();');
         $("#createPolitic").attr('onclick', 'getModalToCreatePolitic();');
         $("#logo").attr('onclick', '$("html,body").animate({scrollTop:0}, "slow");');
@@ -228,11 +245,12 @@ var PoliticStatusScript = (function () {
 
     events = function () {
 
-        $('.sandbox-container.input-group.date').datepicker({
+        $('.sandbox-container > .input-group > .date').datepicker({
             orientation: "bottom left"
         });
 
         $('.navbar-default').css('background-color', 'rgba(0, 30, 79, 0.7)');
+
         setButtonEvents();
     };
 

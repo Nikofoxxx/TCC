@@ -22,10 +22,12 @@
     margin-top: 50px;
     float: right;
     margin-right: 20px;
-}
-
-#userPanel a{
-    color: rgb(0, 30, 79);
+    background-color: #FFF;
+    width: 33%;
+    height: 55px;
+    text-align: center;
+    border-left: solid 17px rgb(0, 30, 79);
+    border-right: solid 17px rgb(0, 30, 79);
 }
 
 .presentation #content {
@@ -67,27 +69,14 @@ tbody td .btn {
     display: block;
 }
 
-.pageError, .serverError {
-    padding: 20px 0px 700px;
-    background-image: url(../images/background.jpg);
-    background-repeat: no-repeat;
-    background-size: cover; 
-}
-
-.pageError h2, .serverError h2 {
-    font-family: 'Oswald', sans-serif;
-    text-align: center; 
-    font-size: 60px;
-}
-
 #tweetsModal.modal-wide .modal-dialog {
     width: 93%;
 }
 
 .separator {
     position:absolute;
-    left:49.85%;
-    top:20%;
+    margin-left: 50.5%;
+    top:35%;
     bottom:5%;
     border-left:3px solid #dfdfdf;
     border-radius: 10px;
@@ -102,7 +91,7 @@ tbody td .btn {
 }
 
 #left-container {
-    height: 283px;
+    height: 234px;
     background-image: url(../images/tweet-bg.jpg);
     background-repeat: repeat;
     overflow: auto;
@@ -118,15 +107,10 @@ tbody td .btn {
 .noRegisters {
     font-family: 'Oswald', sans-serif;
     font-size: 18px;
+    text-align: center;
 }
 
-.noRegisters#leftNoRegisterMsg {
-    margin-left: 31%;
-}
 
-.noRegisters#rightNoRegisterMsg {
-    margin-left: 34%;
-}
 
 .twitter-button-container{
     margin-top: 15%;
@@ -145,16 +129,18 @@ tbody td .btn {
 
 .twitter-button-container .left-text {
     font-family: 'Oswald', sans-serif;
-    font-size: 30px;
+    font-size: 20px;
     color: rgb(0, 30, 79);
-    margin-top: 25px;
+    margin-top: 35px;
+    padding-left: 15px;
 }
 
 .twitter-button-container .right-text {
     font-family: 'Oswald', sans-serif;
-    font-size: 19px;
+    font-size: 14px;
     color: rgb(0, 30, 79);
     margin-top: 10px;
+    padding-left: 40px;
 }
 html, body, #mapDiv {
     padding: 0;
@@ -187,4 +173,23 @@ footer .footer-left {
 
 footer .footer-center {
     margin-top: 14px;
+}
+
+.pageError h2, .serverError h2 {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 60px;
+}
+
+.pageError, .serverError {
+    padding: 20px 0px 400px;
+    background-image: url(../images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.pageError h2, .serverError h2 {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 60px;
 }

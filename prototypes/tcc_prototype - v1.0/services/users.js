@@ -38,9 +38,23 @@ module.exports = function(app)
 			});			
 		},
 
-		update: function(callback) 
+		update: function(userToEdit, userName, callback)
 		{
-			//TODO		
+			var statement;
+
+			if(userToEdit.passwd != null && userToEdit.passwd != "")
+				statement = { firstName : userToEdit.firstName, lastName : userToEdit.lastName
+							, passwd : userToEdit.passwd };
+			else
+				statement = { firstName : userToEdit.firstName, lastName : userToEdit.lastName };
+
+			Users.update({ userName: userName }, { $set : statement }, function(error, user)
+				{
+					if(error)
+						throw error;
+
+					callback(user);
+				});
 		},
 
 		getToLogin: function(userName, password, callback)

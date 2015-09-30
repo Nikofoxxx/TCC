@@ -4,12 +4,13 @@ module.exports = function (app) {
 
     var dateToSearch = new Date().toISOString();
     var dateToCompare = new Date();
+    var queryComments;
 
     var SNDataController =
     {
         getUpdatedComments: function (client, user) {
             try {
-                var queryComments = setTimeout(function () {
+                this.queryComments = setTimeout(function () {
 
                     Politics.getAllUserPolitics(user, function (politics) {
                         if (politics != null) {
@@ -84,6 +85,10 @@ module.exports = function (app) {
                 console.log(ex.message);
                 res.status(500).send("Problemas ao buscar os comentários por data!");
             }
+        },
+
+        clearQueryingCommentsTimeout: function(){
+            clearTimeout(this.queryComments);
         }
     };
     return SNDataController;

@@ -61,8 +61,13 @@ io.on('connection', function (client) {
 
 	if (connect_sid) {
 		session_store.get(sid, function (error, session) {
-			console.log('Cliente conectado!');
+			console.log('O Cliente de ID ' + client.id + ' foi conectado!');
 			SNData.getUpdatedComments(client, session.user.userName);
 		});
 	}
+
+	client.on('disconnect', function() {
+		SNData.clearQueryingCommentsTimeout();
+		console.log('O Cliente de ID ' + client.id + ' foi desconectado!');
+	});
 });

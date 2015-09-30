@@ -3,22 +3,29 @@
 
       <div id="userPanel">
         Seja bem vindo <label><%= session.firstName %> <%= session.lastName %>!</label>
-        <br />
-        <form method="post" action="/logout">
-          <input type="submit"  class="btn btn-primary btn-xs" value="Sair">
-        </form>
+        <input type="text" id="hiddenUserName" value="<%= session.userName %>" hidden="true">
+        <div class="row">
+          <div class="col-xs-6" style="padding-right: 2px;">
+            <a id="editUserBtn" class="btn btn-default btn-xs" style="float: right;">Editar</a>
+          </div>
+          <div class="col-xs-6" style="padding-left: 2px;">
+            <form method="post" action="/logout">
+              <input type="submit"  class="btn btn-primary btn-xs" value="Sair" style="float: left;" />
+            </form>
+          </div>
+        </div>
       </div>
 
       <div id="content">
         <h1>Como estão nossos representantes?</h1>
         <h2>Acompanhe como está a aprovação de seu representante no Twitter</h2>
 
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="width: 78%;">
           <div class="panel-heading" style="font-weight: bold;">Políticos a serem buscados
             <a id="toggleBtn" class="btn btn-default btn-xs"><i class="fa fa-eye-slash fa-lg"></i></a>
           </div>
           <div class="panel-body">
-            <a id="createPolitic" class="col-md-1 btn btn-primary">Novo</a>
+            <a id="createPolitic" style="width: 60px;" class="col-xs-1 btn btn-primary">Novo</a>
             <table id="politicsGrid" class="table table-striped table-bordered" style="margin-top: 10px;" width="100%" cellspacing="0">
               <thead>
                 <tr>
@@ -33,14 +40,13 @@
       </div>
       <div class="twitter-button-container" style="width: 100%;">
         <div class="row" style="margin-right: 0px; margin-left: 0px;">
-          <div class="col-md-5 left-text">Clique no botão ao lado para começar</div>
-          <div class="col-md-2">
+          <div class="col-xs-5 left-text">Clique no botão ao lado para começar</div>
+          <div class="col-xs-2">
             <a id="twitterBtn" class="twitter-share-button-mod" style="width: 125px; height: 40px">Ver Tweets</a>
           </div>
-          <div class="col-md-5 right-text"><i class="fa fa-quote-left"></i> Para a política o homem é um meio; para a
-            moral é um fim. A revolução do futuro será o triunfo da moral sobre a política. <i
-                    class="fa fa-quote-right"></i>
-            <br/>
+          <div class="col-xs-5 right-text"><i class="fa fa-quote-left"></i> Para a política o homem é um meio; para a
+            moral é um fim. A revolução do futuro será
+            o triunfo da moral sobre a política. <i class="fa fa-quote-right"></i>
             <h6 style="font-style: italic;">Ernest Renan</h6>
           </div>
         </div>
@@ -50,6 +56,7 @@
 
       </div>
       <a id="clearMakers" class="btn btn-primary">Limpar Marcadores</a>
+      <div id="divToEditUserModal"></div>
       <div id="divToTweetsModal"></div>
       <div id="divToEditPolitcModal"></div>
       <div id="divToCreatePolitcModal"></div>

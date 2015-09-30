@@ -9,4 +9,5 @@ module.exports = function(app)
 	app.get('/removePoliticModal', isLogged, home.removePolitic);
 	app.get('/tweetsModal', isLogged, home.tweetsModal);
 	app.get('/getTweetModalContent', isLogged, home.getTweetModalContent);
+	app.get('/about', isLogged, home.about);
 };

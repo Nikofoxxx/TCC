@@ -78,11 +78,6 @@ var RegisterScript = (function() {
                         		message: 'O campo de senha não pode estar vazio!'
                     		},
 
-                    		different: {
-                        		field: 'userName',
-                        		message: 'O usuário não deve ser igual a senha!'
-                    		},
-
                     		identical: {
                         		field: 'retypePasswd',
                         		message: 'As senhas devem corresponder!'
@@ -94,11 +89,6 @@ var RegisterScript = (function() {
 						validators: {
                     		notEmpty: {
                         		message: 'Por favor, digite a senha novamente!'
-                    		},
-
-                    		different: {
-                        		field: 'userName',
-                        		message: 'O usuário não deve ser igual a senha!'
                     		},
 
                     		identical: {

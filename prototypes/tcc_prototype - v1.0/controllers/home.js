@@ -24,6 +24,10 @@ module.exports = function(app)
 
 		getTweetModalContent: function(req, res){
 			res.render('home/shared/_tweetsModalPartialViewContent.ejs');
+		},
+
+		about: function(req, res){
+			res.render('about/about.ejs');
 		}
 	};
 	return HomeController;
