@@ -4,10 +4,12 @@ module.exports = function(app)
 
 	var SNDataService = 
 	{
-		getCommentsByDate: function(initialDate, finalDate, politic, callback){
+		getCommentsByDate: function(initialDate, finalDate, politic, commentsIndex, callback){
 
 			SNData.find({ $and: [ { date : { '$gte': initialDate, '$lte': finalDate }},
 				{ 'keyword' : politic }]})
+				.skip(commentsIndex)
+				.limit(50)
 				.select('tweet_id')
 				.exec(function(error, comments){
 					if (error)

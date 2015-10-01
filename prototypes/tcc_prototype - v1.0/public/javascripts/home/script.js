@@ -230,6 +230,7 @@ var PoliticStatusScript = (function () {
 
                 $("#firstName").val(firstName);
                 $("#lastName").val(lastName.substring(0, lastName.length - 1));
+                $("#userNameDisabled").val($("#hiddenUserName").val());
                 $("#userName").val($("#hiddenUserName").val());
             }
         });
@@ -244,19 +245,18 @@ var PoliticStatusScript = (function () {
     };
 
     events = function () {
+        $('.navbar-default').css('background-color', 'rgba(0, 30, 79, 0.7)');
 
-        $('.sandbox-container > .input-group > .date').datepicker({
+        $('.sandbox-container .input-group.date').datepicker({
             orientation: "bottom left"
         });
-
-        $('.navbar-default').css('background-color', 'rgba(0, 30, 79, 0.7)');
 
         setButtonEvents();
     };
 
     init = function () {
-        mountGrid();
         events();
+        mountGrid();
     };
 
     //Public Methods

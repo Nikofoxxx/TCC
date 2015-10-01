@@ -6,6 +6,8 @@ module.exports = function (app) {
     var dateToCompare = new Date();
     var queryComments;
 
+    var commentsIndex = 0;
+
     var SNDataController =
     {
         getUpdatedComments: function (client, user) {
@@ -64,14 +66,20 @@ module.exports = function (app) {
                 var initialDate = new Date(req.body.initialDate).toISOString();
                 var finalDate = new Date(req.body.finalDate).toISOString();
                 var politic = req.body.politic;
+                var action = req.body.action;
 
-                SNData.getCommentsByDate(initialDate, finalDate, politic, function (comments) {
+                (action == 'filter') ? commentsIndex = 0 : commentsIndex;
+
+                SNData.getCommentsByDate(initialDate, finalDate, politic, commentsIndex, function (comments) {
                     if(comments != null) {
                         if (comments.length > 0) {
 
                            var array = [];
 
                            comments.forEach(function(comment){ array.push(comment.tweet_id); });
+
+                           commentsIndex = commentsIndex + 50;
+
                            res.end(JSON.stringify(array));
                         }
                         else {

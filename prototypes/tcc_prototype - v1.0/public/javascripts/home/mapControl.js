@@ -5,34 +5,51 @@ var MapScript = (function () {
     var markers = [];
 
     initMap = function () {
-        map = new google.maps.Map($('#mapDiv')[0], {
-                center: {lat:  -14.718, lng: -56.449},
+
+        var resolution = $(window).width();
+
+        if (resolution >= 952){
+            $("#mapDiv").width(700);
+
+            map = new google.maps.Map($('#mapDiv')[0], {
+                center: {lat: -14.718, lng: -56.449},
                 zoom: 4
-        });
+            });
+        }else{
+            $("#mapDiv").width(500);
+
+            map = new google.maps.Map($('#mapDiv')[0], {
+                center: {lat: -15.000, lng: -54.449},
+                zoom: 4
+            });
+        }
+
     };
 
-    getLocationByAddress = function(address){
-        if(address != ""){
-            var data = { address: address };
+    getLocationByAddress = function (address) {
+        if (address != "") {
+            var data = {address: address};
 
             $.ajax({
                 url: 'https://maps.googleapis.com/maps/api/geocode/json',
                 data: data,
-                success: function (result) {  setMaker(result); }
+                success: function (result) {
+                    setMaker(result);
+                }
             });
         }
     };
 
-    setMaker = function(placeObject){
+    setMaker = function (placeObject) {
 
-        if(placeObject.results.length > 0){
+        if (placeObject.results.length > 0) {
 
             var latitude = placeObject.results[0].geometry.location.lat;
             var longitude = placeObject.results[0].geometry.location.lng;
 
             marker = new google.maps.Marker({
 
-                position: { lat: latitude, lng: longitude },
+                position: {lat: latitude, lng: longitude},
                 map: map,
                 title: placeObject.results[0].address_components[0].long_name,
                 animation: google.maps.Animation.DROP
@@ -47,7 +64,25 @@ var MapScript = (function () {
         }
     };
 
-    setMapEvents = function(){
+    handleMapAccordingScreenResolution = function () {
+        var resolution = $(window).width();
+        if (resolution >= 952){
+            $("#mapDiv").width(700);
+            var newLatLng = new google.maps.LatLng(-14.718, -56.449);
+            map.setCenter(newLatLng);
+        }else{
+            $("#mapDiv").width(500);
+            var newLatLng = new google.maps.LatLng(-15.000, -54.449);
+            map.setCenter(newLatLng);
+        }
+    };
+
+    setMapEvents = function () {
+
+        $(window).resize(function () {
+            handleMapAccordingScreenResolution();
+        });
+
         $("#clearMakers").attr("onclick", "clearMarkers()");
     };
 

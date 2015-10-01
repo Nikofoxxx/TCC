@@ -58,7 +58,14 @@ var TweetsModalControl = (function () {
         return secondDate;
     };
 
-    validateDatepickers = function(){
+    getFilterContainer = function(){
+        var activeLi = $("ul#tabs li.active")[0];
+        var activeTab = $(activeLi).find("a").attr('href');
+        var filterContainer = $(activeTab).find("#left-container")[0];
+        return filterContainer;
+    };
+
+    validateDatepickers = function(action){
 
         var initialDate = getInitialDate();
         var finalDate = getFinalDate();
@@ -76,7 +83,7 @@ var TweetsModalControl = (function () {
             toastr.error('Por favor, informe a data inicial e final para a busca!');
         }else{
             if (!verifyIfSecondDateIsLess(firstDate, secondDate)){ getTweetsByFilter($(firstDate).datepicker("getDate"),
-                                                                                     $(secondDate).datepicker("getDate")); }
+                                                                                     $(secondDate).datepicker("getDate"), action); }
             else {
                 addAndRemoveErrorClassInDatepickers(finalDate, secondDate);
                 toastr.error('A data final não pode ser menor que a data inicial!');
@@ -90,13 +97,13 @@ var TweetsModalControl = (function () {
     };
 
     verifyIfSecondDateIsLess = function(firstDate, secondDate){
-
-        if($(firstDate).datepicker("getDate") > $(secondDate).datepicker("getDate"))
-            return true;
-        return false;
+        return ($(firstDate).datepicker("getDate") > $(secondDate).datepicker("getDate")) ? true : false;
     };
 
-    getTweetsByFilter = function (firstDate, secondDate) {
+    getTweetsByFilter = function (firstDate, secondDate, action) {
+
+        var filterContainer = getFilterContainer();
+        $(filterContainer).find(".showMoreBtn").hide();
 
         var currentPoliticTab = $("ul#tabs li.active").text();
 
@@ -105,47 +112,74 @@ var TweetsModalControl = (function () {
         var data = {
             politic: currentPoliticTab,
             initialDate: firstDate,
-            finalDate: secondDate
+            finalDate: secondDate,
+            action: action
         };
 
         $.ajax({
             url: "/getCommentsByDate",
             data: data,
             type: "POST",
-            success: function (result) { handleFindTweets(result) },
+            success: function (result) {
+                checkAndDisableDatepickersAfterSuccess(action);
+                handleFindTweets(result);
+            },
             error: function (result) { toastr.warning(result.responseText); }
         });
     };
 
+    checkAndDisableDatepickersAfterSuccess = function(action){
+        if(action == 'filter'){
+            var firstDate = getFirstDate();
+            var secondDate = getSecondDate();
+
+            $('#filterBtn').attr('disabled', 'disabled');
+            $(firstDate).attr('disabled', 'disabled');
+            $(secondDate).attr('disabled', 'disabled');
+        }
+    };
+
     handleFindTweets = function(tweets){
 
-        var activeLi = $("ul#tabs li.active")[0];
-        var activeTab = $(activeLi).find("a").attr('href');
-        var filterContainer = $(activeTab).find("#left-container")[0];
+        var filterContainer = getFilterContainer();
+        var tweetsDiv = $(filterContainer).find("#tweetsDiv")[0];
+
         $(filterContainer).find("#leftNoRegisterMsg").hide();
 
         tweets = JSON.parse(tweets);
 
-        $.each(tweets, function(index, value){
+        tweets.forEach(function(tweet){
             twttr.widgets.createTweet(
-                value,
-                filterContainer
-            );
+                tweet,
+                tweetsDiv
+            ).then(function(el){
+                setTimeout(function(){
+                    $(filterContainer).find(".showMoreBtn").css({ display: 'block' });
+                }, 8000);
+            });
         });
     };
 
-    cleanDateFields = function () {
+    cleanAll = function () {
 
         var initialDate = getInitialDate();
         var finalDate = getFinalDate();
         var firstDate = getFirstDate();
         var secondDate = getSecondDate();
+        var filterContainer = getFilterContainer();
 
         $(firstDate).val('');
         $(secondDate).val('');
         $(initialDate).removeClass('has-error');
         $(finalDate).removeClass('has-error');
+        $(filterContainer).find('#tweetsDiv').empty();
+        $(filterContainer).find(".showMoreBtn").hide();
+        $(filterContainer).find("#leftNoRegisterMsg").show();
+        $('#filterBtn').attr('disabled', false);
+        $(firstDate).attr('disabled', false);
+        $(secondDate).attr('disabled', false);
     };
+
 
     init = function () {
         openWebSocket();
@@ -153,7 +187,7 @@ var TweetsModalControl = (function () {
 
 //Public Methods
     return {
-        init: init,
+        init: init
     };
 
 })();

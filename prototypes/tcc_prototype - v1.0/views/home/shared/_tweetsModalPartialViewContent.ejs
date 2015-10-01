@@ -27,8 +27,8 @@
         </div>
         <div class="row" style="margin-top: 15px;">
             <div class="col-xs-3">
-                <a id="filterBtn" class="btn btn-primary" onClick="validateDatepickers();">Filtrar</a>
-                <a id="cleanBtn" class="btn btn-default" onClick="cleanDateFields();" style="margin-left: 5px;">Limpar</a>
+                <a id="filterBtn" class="btn btn-primary" onClick="validateDatepickers('filter');">Filtrar</a>
+                <a id="cleanBtn" class="btn btn-default" onClick="cleanAll();" style="margin-left: 5px;">Limpar</a>
             </div>
         </div>
     </div>
@@ -36,6 +36,13 @@
 
     <div id="left-container" class="container well" style="max-width: 104%">
         <div id="leftNoRegisterMsg" class="noRegisters">Sem registros disponíveis!</div>
+        <div id="tweetsDiv" class="col-xs-12"></div>
+        <div class="row">
+            <div class="col-xs-12">
+                <a class="btn btn-primary showMoreBtn" onClick="validateDatepickers('more');" style="margin-left: auto;
+                        margin-right: auto; display: none; width: 80px;">Ver Mais</a>
+            </div>
+        </div>
     </div>
 </div>
 
