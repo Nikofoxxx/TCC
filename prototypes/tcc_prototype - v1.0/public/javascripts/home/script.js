@@ -73,22 +73,23 @@ var PoliticStatusScript = (function () {
     };
 
     createPolitic = function () {
-        var politicName = $("#createModalInput").val();
+        if(validate($("#createModalInput"))) {
+            var politicName = $("#createModalInput").val();
 
-        var data = {'name': politicName};
-        $.ajax({
-            url: "/createPolitic",
-            data: data,
-            type: "POST",
-            success: function (result) {
-                $("#createPolitcModal").modal('toggle');
-                refreshTable('#politicsGrid', '/getAll', result);
-            },
-            error: function (result) {
-                toastr.error(result.responseText);
-            }
-        });
-
+            var data = {'name': politicName};
+            $.ajax({
+                url: "/createPolitic",
+                data: data,
+                type: "POST",
+                success: function (result) {
+                    $("#createPolitcModal").modal('toggle');
+                    refreshTable('#politicsGrid', '/getAll', result);
+                },
+                error: function (result) {
+                    toastr.error(result.responseText);
+                }
+            });
+        }
     };
 
     getModalToEditPolitic = function (name) {
@@ -102,23 +103,30 @@ var PoliticStatusScript = (function () {
     };
 
     editPolitic = function () {
-        var oldPoliticName = $("#editModalInputHidden").val();
-        var newPoliticName = $("#editModalInput").val();
+        if(validate($("#editModalInput"))){
+            var oldPoliticName = $("#editModalInputHidden").val();
+            var newPoliticName = $("#editModalInput").val();
 
-        var data = {'oldName': oldPoliticName, 'newName': newPoliticName};
-        $.ajax({
-            url: "/editPolitic",
-            data: data,
-            type: "POST",
-            success: function (result) {
-                $("#editPolitcModal").modal('toggle');
-                refreshTable('#politicsGrid', '/getAll', result);
-            },
-            error: function (result) {
-                toastr.error(result.responseText);
-            }
-        });
+            var data = {'oldName': oldPoliticName, 'newName': newPoliticName};
+            $.ajax({
+                url: "/editPolitic",
+                data: data,
+                type: "POST",
+                success: function (result) {
+                    $("#editPolitcModal").modal('toggle');
+                    refreshTable('#politicsGrid', '/getAll', result);
+                },
+                error: function (result) {
+                    toastr.error(result.responseText);
+                }
+            });
+        }
+    };
 
+    validate = function($input){
+        if($input.val() == '') { toastr.error('O campo não pode estar vazio!'); $input.focus(); return false; }
+        if($input.val().length <= 2) { toastr.warning('O campo não pode conter menos que 3 caracteres!'); $input.focus(); return false; }
+        return true;
     };
 
     getModalToRemovePolitic = function (name) {

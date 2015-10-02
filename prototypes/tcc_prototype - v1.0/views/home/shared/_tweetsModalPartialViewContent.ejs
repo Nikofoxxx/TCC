@@ -6,9 +6,9 @@
         <div class="row">
             <div class="col-xs-3">
                 <div id="initialDate" class="input-group date">
-                    <input type='text' id="firstDate" class="form-control" placeholder="Data inicial"
-                           data-provide="datepicker"
-                           data-date-format="dd/mm/yyyy" data-date-language="pt-BR"/>
+                    <input type='text' id="firstDate" class="form-control" maxlength="10" placeholder="Data inicial"
+                           data-provide="datepicker" data-date-format="dd/mm/yyyy"
+                           data-date-language="pt-BR" />
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-calendar"></i>
                                              </span>
@@ -16,9 +16,9 @@
             </div>
             <div class="col-xs-3" style="padding-left: 0px;">
                 <div id="finalDate" class="input-group date">
-                    <input id="secondDate" type='text' class="form-control" placeholder="Data final"
-                           data-provide="datepicker"
-                           data-date-format="dd/mm/yyyy" data-date-language="pt-BR"/>
+                    <input id="secondDate" type='text' class="form-control" maxlength="10" placeholder="Data final"
+                           data-provide="datepicker" data-date-format="dd/mm/yyyy"
+                           data-date-language="pt-BR" />
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-calendar"></i>
                                              </span>
@@ -58,8 +58,12 @@
 
 <script>
     var today = new Date();
+
     $('#firstDate, #secondDate').datepicker({
         todayHighlight: true,
+        startDate: '01/01/2015',
         endDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
     });
+
+    $('#firstDate, #secondDate').mask('99/99/9999', { placeholder: " " });
 </script>
