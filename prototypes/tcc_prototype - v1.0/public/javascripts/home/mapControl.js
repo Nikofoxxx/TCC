@@ -26,32 +26,33 @@ var MapScript = (function () {
 
     };
 
-    getLocationByAddress = function (address) {
+    getLocationByAddress = function (address, keyword) {
         if (address != "") {
-            var data = {address: address};
+
+            var data = { address: address };
 
             $.ajax({
                 url: 'https://maps.googleapis.com/maps/api/geocode/json',
                 data: data,
                 success: function (result) {
-                    setMaker(result);
+                    setMaker(result, keyword);
                 }
             });
         }
     };
 
-    setMaker = function (placeObject) {
+    setMaker = function (placeObject, keyword) {
 
         if (placeObject.results.length > 0) {
 
             var latitude = placeObject.results[0].geometry.location.lat;
             var longitude = placeObject.results[0].geometry.location.lng;
+            var location = placeObject.results[0].address_components[0].long_name;
 
             marker = new google.maps.Marker({
-
                 position: {lat: latitude, lng: longitude},
                 map: map,
-                title: placeObject.results[0].address_components[0].long_name,
+                title: location + ". Palavra-chave: " + keyword,
                 animation: google.maps.Animation.DROP
             });
             markers.push(marker);
