@@ -247,8 +247,9 @@ var PoliticStatusScript = (function () {
     events = function () {
         $('.navbar-default').css('background-color', 'rgba(0, 30, 79, 0.7)');
 
-        $('.sandbox-container .input-group.date').datepicker({
-            orientation: "bottom left"
+        $('#secondDate').datepicker({
+            orientation: "bottom left",
+            todayBtn: true
         });
 
         setButtonEvents();

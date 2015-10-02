@@ -27,7 +27,7 @@
         </div>
         <div class="row" style="margin-top: 15px;">
             <div class="col-xs-3">
-                <a id="filterBtn" class="btn btn-primary" onClick="validateDatepickers('filter');">Filtrar</a>
+                <a id="filterBtn" data-toggle="modal" class="btn btn-primary" onClick="validateDatepickers('filter');">Filtrar</a>
                 <a id="cleanBtn" class="btn btn-default" onClick="cleanAll();" style="margin-left: 5px;">Limpar</a>
             </div>
         </div>
@@ -39,7 +39,7 @@
         <div id="tweetsDiv" class="col-xs-12"></div>
         <div class="row">
             <div class="col-xs-12">
-                <a class="btn btn-primary showMoreBtn" onClick="validateDatepickers('more');" style="margin-left: auto;
+                <a class="btn btn-primary showMoreBtn" data-toggle="modal" onClick="validateDatepickers('more');" style="margin-left: auto;
                         margin-right: auto; display: none; width: 80px;">Ver Mais</a>
             </div>
         </div>
@@ -55,3 +55,11 @@
         <div id="rightNoRegisterMsg" class="noRegisters">Sem registros disponíveis!</div>
     </div>
 </div>
+
+<script>
+    var today = new Date();
+    $('#firstDate, #secondDate').datepicker({
+        todayHighlight: true,
+        endDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+    });
+</script>

@@ -101,6 +101,7 @@ var TweetsModalControl = (function () {
     };
 
     getTweetsByFilter = function (firstDate, secondDate, action) {
+        bootwait.show();
 
         var filterContainer = getFilterContainer();
         $(filterContainer).find(".showMoreBtn").hide();
@@ -124,7 +125,10 @@ var TweetsModalControl = (function () {
                 checkAndDisableDatepickersAfterSuccess(action);
                 handleFindTweets(result);
             },
-            error: function (result) { toastr.warning(result.responseText); }
+            error: function (result) {
+                bootwait.hide();
+                toastr.warning(result.responseText);
+            }
         });
     };
 
@@ -133,7 +137,10 @@ var TweetsModalControl = (function () {
             var firstDate = getFirstDate();
             var secondDate = getSecondDate();
 
-            $('#filterBtn').attr('disabled', 'disabled');
+            var activeLi = $("ul#tabs li.active")[0];
+            var activeTab = $(activeLi).find("a").attr('href');
+
+            $(activeTab).find('#filterBtn').attr('disabled', 'disabled');
             $(firstDate).attr('disabled', 'disabled');
             $(secondDate).attr('disabled', 'disabled');
         }
@@ -155,7 +162,8 @@ var TweetsModalControl = (function () {
             ).then(function(el){
                 setTimeout(function(){
                     $(filterContainer).find(".showMoreBtn").css({ display: 'block' });
-                }, 8000);
+                    bootwait.hide();
+                }, 5000);
             });
         });
     };
@@ -168,6 +176,9 @@ var TweetsModalControl = (function () {
         var secondDate = getSecondDate();
         var filterContainer = getFilterContainer();
 
+        var activeLi = $("ul#tabs li.active")[0];
+        var activeTab = $(activeLi).find("a").attr('href');
+
         $(firstDate).val('');
         $(secondDate).val('');
         $(initialDate).removeClass('has-error');
@@ -175,11 +186,10 @@ var TweetsModalControl = (function () {
         $(filterContainer).find('#tweetsDiv').empty();
         $(filterContainer).find(".showMoreBtn").hide();
         $(filterContainer).find("#leftNoRegisterMsg").show();
-        $('#filterBtn').attr('disabled', false);
+        $(activeTab).find('#filterBtn').attr('disabled', false);
         $(firstDate).attr('disabled', false);
         $(secondDate).attr('disabled', false);
     };
-
 
     init = function () {
         openWebSocket();
