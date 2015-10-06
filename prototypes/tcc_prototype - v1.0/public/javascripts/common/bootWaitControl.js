@@ -69,7 +69,7 @@
                 options = {};
             }
             if (typeof message === 'undefined') {
-                message = String.format('<i class="fa fa-gavel"></i> {0}', 'Agurade, processando...');
+                message = String.format('<i class="fa fa-gavel"></i> {0}', 'Aguarde, processando...');
             }
             var settings = $.extend({
                     headerText: '',

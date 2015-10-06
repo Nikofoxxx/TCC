@@ -157,13 +157,17 @@ html, body, #mapDiv {
     border-right: solid 17px rgb(0, 30, 79);
 }
 
-.map-container #clearMakers {
+.map-container #clearMakers, #donutChartBtn {
     margin-top: 3%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 3%;
     display: block;
     width: 160px;
+}
+
+#donutChartBtn{
+    width: 200px;
 }
 
 .map-container h2 {
@@ -176,6 +180,10 @@ html, body, #mapDiv {
     margin-left: auto;
     margin-right: auto;
     margin-top: 3%;
+}
+
+#donutChartModal .modal-dialog {
+    width: 60%;
 }
 
 footer {

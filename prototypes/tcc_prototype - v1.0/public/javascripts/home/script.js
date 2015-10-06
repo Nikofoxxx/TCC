@@ -244,12 +244,24 @@ var PoliticStatusScript = (function () {
         });
     };
 
+    getDonutChartModal = function(){
+        getPoliticsMentionCountObject(function(politicsObject){
+            if(politicsObject.length > 0){
+                $("#donutChartModal").modal('show');
+                setChartValues();
+            } else {
+                toastr.warning("Ainda não foram contabilizados os tweets! Por favor, aguarde!");
+            }
+        });
+    };
+
     setButtonEvents = function () {
         $("#editUserBtn").attr('onclick', 'getEditUserModal();');
         $("#toggleBtn").attr('onclick', 'hideOrShowPoliticsGrid();');
         $("#createPolitic").attr('onclick', 'getModalToCreatePolitic();');
         $("#logo").attr('onclick', '$("html,body").animate({scrollTop:0}, "slow");');
         $("#twitterBtn").attr('onclick', 'getTweetsModal();');
+        $("#donutChartBtn").attr('onclick', 'getDonutChartModal();')
     };
 
     events = function () {
