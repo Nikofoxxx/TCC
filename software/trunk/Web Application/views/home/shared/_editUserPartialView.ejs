@@ -1,0 +1,47 @@
+<div id="editUserModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Editar Usuario</h4>
+            </div>
+            <div class="modal-body">
+                <form id="editUserForm">
+                    <div class="form-group">
+                        <label>Nome:</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Sobrenome:</label>
+                        <input type="text" id="lastName" name="lastName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Usuário:</label>
+                        <input type="text" id="userNameDisabled" class="form-control" disabled="disabled">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="userName" name="userName" class="form-control  hidden">
+                    </div>
+                    <div class="form-group">
+                        <label>Nova Senha:</label>
+                        <input type="password" id="passwd" name="passwd" class="form-control"
+                               placeholder="(Não alterada)">
+                    </div>
+                    <div class="form-group">
+                        <label>Digite a senha novemente:</label>
+                        <input type="password" id="retypePasswd" name="retypePasswd" class="form-control">
+                    </div>
+                    <br/>
+
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <button type="submit" id="submitUserBtn" class="btn btn-primary">Salvar</button>
+                            <a class="btn btn-default" data-dismiss="modal">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/javascripts/home/userControl.js"></script>

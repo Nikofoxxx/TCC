@@ -1,0 +1,42 @@
+<div id="registerModal" class="modal fade">
+    <div class="modal-dialog">
+       	<div class="modal-content">
+	       <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Cadastro</h4>
+		   </div>
+			<div class="modal-body">
+				<form id="newUserForm">
+						<div class="form-group">
+							<label>Nome:</label>
+				  			<input type="text" id="firstName" name="firstName" class="form-control">
+						</div>
+				  		<div class="form-group">
+					  		<label>Sobrenome:</label>
+					  		<input type="text" id="lastName" name="lastName" class="form-control">
+				  		</div>
+				  		<div class="form-group">
+					  		<label>Usuário:</label>
+					  		<input type="text" id="userName" name="userName" class="form-control">
+				  		</div>
+				  		<div class="form-group">
+					  		<label>Senha:</label>
+					  		<input type="password" id="passwd" name="passwd" class="form-control">
+				  		</div>
+				  		<div class="form-group">
+					  		<label>Digite a senha novemente:</label>
+					  		<input type="password" id="retypePasswd" name="retypePasswd" class="form-control">
+				  		</div>
+					<br />
+					<div class="modal-footer">
+						<div class="form-group">
+							<button type="submit" id="registerBtn" class="btn btn-primary">Salvar</button>
+							<a class="btn btn-default" data-dismiss="modal">Cancelar</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+    </div>
+</div>
+<script type="text/javascript" src="/javascripts/login/register.js"></script>

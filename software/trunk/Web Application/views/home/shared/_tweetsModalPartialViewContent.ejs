@@ -1,0 +1,69 @@
+<br/>
+<div class="col-xs-6">
+    <h4 class="modal-font">Filtrar por data:</h4>
+
+    <div class="container sandbox-container" style="padding-left: 0;">
+        <div class="row">
+            <div class="col-xs-3">
+                <div id="initialDate" class="input-group date">
+                    <input type='text' id="firstDate" class="form-control" maxlength="10" placeholder="Data inicial"
+                           data-provide="datepicker" data-date-format="dd/mm/yyyy"
+                           data-date-language="pt-BR" />
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                             </span>
+                </div>
+            </div>
+            <div class="col-xs-3" style="padding-left: 0px;">
+                <div id="finalDate" class="input-group date">
+                    <input id="secondDate" type='text' class="form-control" maxlength="10" placeholder="Data final"
+                           data-provide="datepicker" data-date-format="dd/mm/yyyy"
+                           data-date-language="pt-BR" />
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                             </span>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-xs-3">
+                <a id="filterBtn" data-toggle="modal" class="btn btn-primary" onClick="validateDatepickers('filter');">Filtrar</a>
+                <a id="cleanBtn" class="btn btn-default" onClick="cleanAll();" style="margin-left: 5px;">Limpar</a>
+            </div>
+        </div>
+    </div>
+    <br/>
+
+    <div id="left-container" class="container well" style="max-width: 104%">
+        <div id="leftNoRegisterMsg" class="noRegisters">Sem registros disponíveis!</div>
+        <div id="tweetsDiv" class="col-xs-12"></div>
+        <div class="row">
+            <div class="col-xs-12">
+                <a class="btn btn-primary showMoreBtn" data-toggle="modal" onClick="validateDatepickers('more');" style="margin-left: auto;
+                        margin-right: auto; display: none; width: 80px;">Ver Mais</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="separator"></div>
+
+<div class="col-xs-6" style="padding-left: 35px;">
+    <h4 class="modal-font">Live Stream:</h4>
+
+    <div id="right-container" class="container well" style="max-width: 100%">
+        <div id="rightNoRegisterMsg" class="noRegisters">Sem registros disponíveis!</div>
+    </div>
+</div>
+
+<script>
+    var today = new Date();
+
+    $('#firstDate, #secondDate').datepicker({
+        todayHighlight: true,
+        startDate: '01/01/2015',
+        endDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+    });
+
+    $('#firstDate, #secondDate').mask('99/99/9999', { placeholder: " " });
+</script>

@@ -1,0 +1,99 @@
+<% include ../common/header %>
+    <div class="presentation">
+
+      <div id="userPanel">
+        Seja bem vindo <label><%= session.firstName %> <%= session.lastName %>!</label>
+        <input type="text" id="hiddenUserName" value="<%= session.userName %>" hidden="true">
+        <div class="row">
+          <div class="col-xs-6" style="padding-right: 2px;">
+            <a id="editUserBtn" class="btn btn-default btn-xs" style="float: right;">Editar</a>
+          </div>
+          <div class="col-xs-6" style="padding-left: 2px;">
+            <form method="post" action="/logout">
+              <input type="submit"  class="btn btn-primary btn-xs" value="Sair" style="float: left;" />
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="content">
+        <h1>Como estão nossos representantes?</h1>
+        <h2>Acompanhe como está a aprovação de seu representante no Twitter</h2>
+
+        <div class="panel panel-default" style="width: 78%;">
+          <div class="panel-heading" style="font-weight: bold;">Políticos a serem buscados
+            <a id="toggleBtn" class="btn btn-default btn-xs"><i class="fa fa-eye-slash fa-lg"></i></a>
+          </div>
+          <div class="panel-body">
+            <a id="createPolitic" style="width: 60px;" class="col-xs-1 btn btn-primary">Novo</a>
+            <table id="politicsGrid" class="table table-striped table-bordered" style="margin-top: 10px;" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                 <th>Nome do Político</th>
+                 <th>Editar</th>
+                 <th>Deletar</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="twitter-button-container" style="width: 100%;">
+        <div class="row" style="margin-right: 0px; margin-left: 0px;">
+          <div class="col-xs-5 left-text">Clique no botão ao lado para começar</div>
+          <div class="col-xs-2">
+            <a id="twitterBtn" class="twitter-share-button-mod" style="width: 125px; height: 40px">Ver Tweets</a>
+          </div>
+          <div class="col-xs-5 right-text"><i class="fa fa-quote-left"></i> Para a política o homem é um meio; para a
+            moral é um fim. A revolução do futuro será
+            o triunfo da moral sobre a política. <i class="fa fa-quote-right"></i>
+            <h6 style="font-style: italic;">Ernest Renan</h6>
+          </div>
+        </div>
+      </div>
+      <div class="map-container">
+        <div class="row" style="width: 100%; margin-left: 0px">
+          <div class="col-xs-12">
+            <h2>Acompanhe os locais de criação dos Tweets</h2>
+          </div>
+        </div>
+        <div class="row" style="width: 100%">
+          <div class="col-xs-12">
+            <a id="donutChartBtn" style="" class="btn btn-primary">Quantidade de Menções</a>
+          </div>
+        </div>
+        <div id="mapDiv"></div>
+        <div class="row" style="width: 100%">
+          <div class="col-xs-12">
+            <a id="clearMakers" style="" class="btn btn-primary">Limpar Marcadores</a>
+          </div>
+        </div>
+      </div>
+      <div id="divToEditUserModal"></div>
+      <div id="divToTweetsModal"></div>
+      <div id="divToEditPolitcModal"></div>
+      <div id="divToCreatePolitcModal"></div>
+      <div id="divToRemovePolitcModal"></div>
+      <div id="donutChartModal" class="modal fade" style="display: none">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Quantidade de Menções por Político</h4>
+            </div>
+            <div class="modal-body">
+              <div class="input-group col-xs-12">
+                <div id="politicChart" style="width: 400px; height: 400px; max-width: 500px; margin-left: auto; margin-right: auto; display: inherit"></div>
+              </div>
+              <br />
+              <div class="modal-footer">
+                <a class="btn btn-default" data-dismiss="modal">Fechar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+<% include ../common/footer %>
+</html>

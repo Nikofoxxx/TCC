@@ -1,0 +1,110 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
+
+.navbar-default {
+    border-bottom-width: 2px;
+    border-color: #FFF;
+    background-color: rgba(0, 30, 79, 0.7);
+    height: 20px;
+}
+
+.navbar-right, .navbar-brand {
+    height: 20px;
+}
+
+#bar-left a, #bar-right a {
+    color: rgb(0, 30, 79);
+    background-color: rgba(255, 255, 255, 1);
+    font-family: 'Oswald', sans-serif;
+}
+
+img {position:relative;z-index:998;}
+.imgwrap {position:relative;width:400px;overflow:hidden;float:left;}
+.img-overlay {z-index:999;background-color:transparent;width:400px;height:400px;position:absolute;top:-200px;left:-200px;border-radius:400px;-moz-border-radius:400px;-webkit-border-radius:400px;border:200px solid white;}
+.imgwrap.small img {top:80px;}
+.imgwrap.small {width:200px;}
+.img-overlay.small {width:200px;height:200px;top:-100px;left:-200px;}
+
+* {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+#content {
+    border-left: solid 17px rgb(0, 30, 79);
+    border-right: solid 17px rgb(0, 30, 79);
+}
+
+.about-container {
+    padding: 20px 0px 200px;
+    background-image: url(../images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.about-container h2 {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 60px;
+    margin-top: 80px;
+}
+
+.about-container .images-row  {
+    margin-top:70px;
+}
+
+.images-row, .names-row, .openSource-row, .git-row, .button-row {
+    background-color: white;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 100%;
+}
+
+.names-row {
+    text-align: center;
+    height: 160px;
+}
+
+.openSource-row h3 {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 40px;
+    color: rgb(0, 30, 79);
+}
+
+.git-row {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 40px;
+    color: rgb(0, 30, 79);
+}
+
+.button-row {
+    height: 100px;
+}
+
+.button-row a {
+    margin-top: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 35px;
+}
+
+.about-container h1 {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 40px;
+    color: rgb(0, 30, 79);
+}
+
+.contact {
+    font-family: 'Oswald', sans-serif;
+}
+
+.contact .contact-label {
+    color: rgb(0, 30, 79);
+}
+
+.col-md-12 {
+    padding-left: 0px;
+}

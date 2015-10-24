@@ -1,0 +1,94 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
+
+.login-body {
+    background-image: url(../images/bg.png);
+	background-repeat: repeat;
+	padding-top: 32px;
+}
+
+.login-body h1 {
+    margin-top: 0px;
+    font-family: 'Oswald', sans-serif;
+    text-align: center; 
+    font-size: 40px;
+    color: #FFF; 
+}
+
+.login-body h3 {
+	font-family: 'Oswald', sans-serif;
+    text-align: center; 
+    font-size: 20px;
+	color: #FFF; 
+}
+
+.admin-form {
+    max-width: 500px;
+    margin: 50px auto;
+}
+
+.widget{
+	margin-top:10px;
+	margin-bottom:20px;
+	background:none repeat scroll 0% 0% #fff
+}
+
+.widget.worange {
+	box-shadow: black 0.0em 0.1em 0.2em 0.1em;
+}
+
+.widget.worange .widget-head{
+	background-color:rgb(0, 30, 79);
+	border:1px solid rgb(0, 30, 82);
+	color:#fff
+}
+
+.widget .widget-head{
+	font-size:18px;
+	padding:12px 15px
+}
+
+.widget .widget-content{
+	border-left:1px solid #ddd;
+	border-right:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+}
+
+.widget .padd{
+	padding:15px
+}
+
+.widget .controls {
+    font-family: 'Oswald', sans-serif;
+}
+
+.widget hr{
+	margin:4px 0;
+	padding:4px 0;
+	border-top:0 none;
+	border-bottom:1px solid #ddd
+}
+
+.btn-log{
+	color: #FFF;
+	background-color:rgb(0, 30, 79);
+	border-color:rgb(0, 30, 82);
+}
+
+.btn-log:hover,.btn-log:focus,.btn-log:active,.btn-log.active,.open>.dropdown-toggle.btn-log{
+	color: #FFF;
+	background-color:rgb(0, 30, 100);
+	border-color:rgb(0, 30, 82);
+	text-transform: none;
+}
+
+.btn-reg{
+	color:rgb(0, 30, 79);
+	background-color:#FFF;
+	border-color:rgb(0, 30, 82);
+}
+
+.btn-reg:hover,.btn-reg:focus,.btn-reg:active,.btn-reg.active,.open>.dropdown-toggle.btn-reg{
+	color: #FFF;
+	background-color:rgb(0, 30, 100);
+	border-color:rgb(0, 30, 82);
+}

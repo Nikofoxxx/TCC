@@ -1,0 +1,225 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
+
+.navbar-default {
+    border-bottom-width: 2px;
+    border-color: #FFF;
+}
+
+#bar-left a, #bar-right a {
+    color: rgb(0, 30, 79);
+    background-color: rgba(255, 255, 255, 1);
+    font-family: 'Oswald', sans-serif;
+}
+
+.presentation {
+    padding: 20px 0px 200px;
+    background-image: url(../images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.presentation  #userPanel {
+    margin-top: 50px;
+    float: right;
+    margin-right: 20px;
+    background-color: #FFF;
+    width: 33%;
+    height: 55px;
+    text-align: center;
+    border-left: solid 17px rgb(0, 30, 79);
+    border-right: solid 17px rgb(0, 30, 79);
+}
+
+.presentation #content {
+    margin-top: 150px;
+}
+
+.presentation h1 { 
+    font-family: 'Oswald', sans-serif;
+    text-align: center; 
+    font-size: 60px; 
+}
+
+.presentation h2 {
+    margin-top: 40px;
+    font-family: 'Oswald', sans-serif;
+    text-align: center; 
+    font-size: 40px; 
+}
+
+.presentation .panel-default {
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 70%;
+}
+
+.navbar-default {
+    background-color: rgb(0, 151, 255);
+}
+
+.dataTables_filter, .dataTables_paginate, .dataTables_info {
+   text-align: right;
+}
+
+tbody td .btn {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#tweetsModal.modal-wide .modal-dialog {
+    width: 93%;
+}
+
+.separator {
+    position:absolute;
+    margin-left: 50.5%;
+    top:35%;
+    bottom:5%;
+    border-left:3px solid #dfdfdf;
+    border-radius: 10px;
+}
+
+.container.well {
+    box-shadow: 0 0 1px 1px #4099FF;
+}
+
+.modal-font {
+    font-family: 'Oswald', sans-serif;
+}
+
+#left-container {
+    height: 234px;
+    background-image: url(../images/tweet-bg.jpg);
+    background-repeat: repeat;
+    overflow: auto;
+}
+
+#right-container {
+    height: 336px;
+    background-image: url(../images/tweet-bg.jpg);
+    background-repeat: repeat;
+    overflow: auto;
+}
+
+.noRegisters {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    text-align: center;
+}
+
+.twitter-button-container{
+    margin-top: 15%;
+    height: 100px;
+    background-color: #FFF;
+    border-left: solid 17px rgb(0, 30, 79);
+    border-right: solid 17px rgb(0, 30, 79);
+}
+
+.twitter-button-container #twitterBtn {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 30px;
+}
+
+.twitter-button-container .left-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    color: rgb(0, 30, 79);
+    margin-top: 35px;
+    padding-left: 15px;
+}
+
+.twitter-button-container .right-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    color: rgb(0, 30, 79);
+    margin-top: 10px;
+    padding-left: 40px;
+}
+
+html, body, #mapDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+.map-container {
+    margin-top: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    background-color: #FFFFFF;
+    border-left: solid 17px rgb(0, 30, 79);
+    border-right: solid 17px rgb(0, 30, 79);
+}
+
+.map-container #clearMakers, #donutChartBtn {
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3%;
+    display: block;
+    width: 160px;
+}
+
+#donutChartBtn{
+    width: 200px;
+}
+
+.map-container h2 {
+    color: rgb(0, 30, 79);
+}
+
+#mapDiv {
+    width: 700px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+}
+
+#donutChartModal .modal-dialog {
+    width: 60%;
+}
+
+footer {
+    height: 50px;
+    background-color: #292727;
+    color: #969696;
+    font-size: 13px;
+}
+
+footer .footer-left {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    color: #969696;
+    margin-top: 13px;
+    padding-left: 30px;
+}
+
+footer .footer-center {
+    margin-top: 14px;
+}
+
+.pageError h2, .serverError h2 {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 60px;
+}
+
+.pageError, .serverError {
+    padding: 20px 0px 400px;
+    background-image: url(../images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.pageError h2, .serverError h2 {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 60px;
+}
