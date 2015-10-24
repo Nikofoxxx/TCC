@@ -11,12 +11,12 @@ import politistatus.twitter.bolt.PolitistatusTwitterBolt;
 
 public class PolitistatusTwitterStreamTask extends TimerTask{
 
-	String consumerKey;
-	String consumerSecret;
-	String accessToken;
-	String accessTokenSecret;
-	LocalCluster cluster;
-	Timer timer;
+	private String consumerKey;
+	private String consumerSecret;
+	private String accessToken;
+	private String accessTokenSecret;
+	private LocalCluster cluster;
+	private Timer timer;
 	
 	public PolitistatusTwitterStreamTask(String consumerKey,
 			String consumerSecret, String accessToken,

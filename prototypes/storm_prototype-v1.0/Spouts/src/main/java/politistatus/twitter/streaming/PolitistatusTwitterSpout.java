@@ -25,14 +25,14 @@ import backtype.storm.utils.Utils;
 @SuppressWarnings("serial")
 public class PolitistatusTwitterSpout extends BaseRichSpout {
 
-	SpoutOutputCollector _collector;
-	LinkedBlockingQueue<Status> queue = null;
-	TwitterStream _twitterStream;
-	String consumerKey;
-	String consumerSecret;
-	String accessToken;
-	String accessTokenSecret;
-	String[] keyWords;
+	private SpoutOutputCollector _collector;
+	private LinkedBlockingQueue<Status> queue = null;
+	private TwitterStream _twitterStream;
+	private String consumerKey;
+	private String consumerSecret;
+	private String accessToken;
+	private String accessTokenSecret;
+	private String[] keyWords;
 
 	public PolitistatusTwitterSpout(String consumerKey, String consumerSecret,
 			String accessToken, String accessTokenSecret, String[] keyWords) {

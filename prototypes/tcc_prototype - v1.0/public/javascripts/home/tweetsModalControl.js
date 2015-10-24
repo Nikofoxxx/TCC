@@ -9,8 +9,8 @@ var TweetsModalControl = (function () {
         var socket = io.connect('http://localhost:3000');
         socket.on('data', function (data) {
             getTweet(data);
-            getLocationByAddress(data.location, data.keyword);
             updatePoliticsCounter(data.keyword);
+            getLocationByAddress(data.location, data.keyword);
         });
     };
 
@@ -25,7 +25,10 @@ var TweetsModalControl = (function () {
                     $(container).find("#rightNoRegisterMsg").hide();
                     twttr.widgets.createTweet(
                         tweet.tweet_id,
-                        container
+                        container,
+                        {
+                            align: 'center'
+                        }
                     );
                 }
             });
@@ -168,7 +171,10 @@ var TweetsModalControl = (function () {
         tweets.forEach(function (tweet) {
             twttr.widgets.createTweet(
                 tweet,
-                tweetsDiv
+                tweetsDiv,
+                {
+                    align: 'center'
+                }
             ).then(function (el) {
                     setTimeout(function () {
                         $(filterContainer).find(".showMoreBtn").css({display: 'block'});
@@ -211,23 +217,23 @@ var TweetsModalControl = (function () {
                 type: 'pie'
             },
             title: {
-                text: 'Porcentagem de menções no Twitter  ' + getDate()
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                text: 'Quantidade de menções no Twitter por Político - ' + getDate()
             },
             plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
+                series: {
                     dataLabels: {
-                        enabled: false
+                        enabled: true,
+                        format: '{point.name}: {point.y}'
                     },
                     showInLegend: true
-                }
+                },
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> do total<br/>'
             },
             series: [{
-                name: "% Menções",
+                name: "Qtd. Menções",
                 colorByPoint: true,
             }]
         });
@@ -261,7 +267,6 @@ var TweetsModalControl = (function () {
                 $(politicsMentionCountObject.data).each(function () {
                     if (this.name == politic) {
                         this.y = this.y + 1;
-                        console.info(this.y);
                     }
                 });
             } else {
@@ -286,8 +291,8 @@ var TweetsModalControl = (function () {
     };
 
     init = function () {
-        openWebSocket();
         setChartConfigurations();
+        openWebSocket();
     };
 
 //Public Methods
