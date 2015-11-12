@@ -121,7 +121,11 @@ var TweetsModalControl = (function () {
         bootwait.show();
 
         var filterContainer = getFilterContainer();
-        $(filterContainer).find(".showMoreBtn").hide();
+
+        if (action == 'more') {
+            $(filterContainer).find(".showMoreBtn").hide();
+            $(filterContainer).find("#tweetsDiv").empty();
+        }
 
         var currentPoliticTab = $("ul#tabs li.active").text();
 
@@ -145,6 +149,7 @@ var TweetsModalControl = (function () {
             error: function (result) {
                 bootwait.hide();
                 toastr.warning(result.responseText);
+                $(filterContainer).find("#leftNoRegisterMsg").show();
             }
         });
     };
