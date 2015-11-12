@@ -14,11 +14,10 @@
     color: #FFF; 
 }
 
-.login-body h3 {
+.login-body > h3 {
 	font-family: 'Oswald', sans-serif;
-    text-align: center; 
-    font-size: 20px;
-	color: #FFF; 
+    text-align: center;
+	color: #FFF;
 }
 
 .admin-form {

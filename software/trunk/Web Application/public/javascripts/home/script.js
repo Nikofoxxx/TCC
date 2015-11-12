@@ -65,8 +65,10 @@ var PoliticStatusScript = (function () {
     };
 
     getModalToCreatePolitic = function () {
+        bootwait.show();
         $("#divToCreatePolitcModal").load("/createPoliticModal", function (res, status, req) {
             if (status == "success") {
+                bootwait.hide();
                 $("#createPolitcModal").modal('show');
             }
         });
@@ -74,6 +76,7 @@ var PoliticStatusScript = (function () {
 
     createPolitic = function () {
         if(validate($("#createModalInput"))) {
+            bootwait.show();
             var politicName = $("#createModalInput").val();
 
             var data = {'name': politicName};
@@ -82,10 +85,12 @@ var PoliticStatusScript = (function () {
                 data: data,
                 type: "POST",
                 success: function (result) {
+                    bootwait.hide();
                     $("#createPolitcModal").modal('toggle');
                     refreshTable('#politicsGrid', '/getAll', result);
                 },
                 error: function (result) {
+                    bootwait.hide();
                     toastr.error(result.responseText);
                 }
             });
@@ -93,8 +98,10 @@ var PoliticStatusScript = (function () {
     };
 
     getModalToEditPolitic = function (name) {
+        bootwait.show();
         $("#divToEditPolitcModal").load("/editPoliticModal", function (res, status, req) {
             if (status == "success") {
+                bootwait.hide();
                 $("#editPolitcModal").modal('show');
                 $("#editModalInput").val(name);
                 $("#editModalInputHidden").val(name);
@@ -104,6 +111,7 @@ var PoliticStatusScript = (function () {
 
     editPolitic = function () {
         if(validate($("#editModalInput"))){
+            bootwait.show();
             var oldPoliticName = $("#editModalInputHidden").val();
             var newPoliticName = $("#editModalInput").val();
 
@@ -113,10 +121,12 @@ var PoliticStatusScript = (function () {
                 data: data,
                 type: "POST",
                 success: function (result) {
+                    bootwait.hide();
                     $("#editPolitcModal").modal('toggle');
                     refreshTable('#politicsGrid', '/getAll', result);
                 },
                 error: function (result) {
+                    bootwait.hide();
                     toastr.error(result.responseText);
                 }
             });
@@ -130,8 +140,10 @@ var PoliticStatusScript = (function () {
     };
 
     getModalToRemovePolitic = function (name) {
+        bootwait.show();
         $("#divToRemovePolitcModal").load("/removePoliticModal", function (res, status, req) {
             if (status == "success") {
+                bootwait.hide();
                 $("#deletePolitcModal").modal('show');
                 $("#removeModalInputHidden").val(name);
             }
@@ -139,6 +151,7 @@ var PoliticStatusScript = (function () {
     };
 
     removePolitic = function () {
+        bootwait.show();
         var politicName = $("#removeModalInputHidden").val();
 
         var data = {'name': politicName};
@@ -147,10 +160,12 @@ var PoliticStatusScript = (function () {
             data: data,
             type: "POST",
             success: function (result) {
+                bootwait.hide();
                 $("#deletePolitcModal").modal('toggle');
                 refreshTable('#politicsGrid', '/getAll', result);
             },
             error: function (result) {
+                bootwait.hide();
                 toastr.error(result.responseText);
             }
         });
@@ -169,8 +184,10 @@ var PoliticStatusScript = (function () {
 
     getTweetsModal = function () {
         if(politicsInGrid.length > 0){
+            bootwait.show();
             $("#divToTweetsModal").load("/tweetsModal", function (res, status, req) {
                 if (status == "success") {
+                    bootwait.hide();
                     $("#tweetsModal").modal('show');
                     generateTweetsModalContent();
                 }
@@ -228,8 +245,10 @@ var PoliticStatusScript = (function () {
     };
 
     getEditUserModal = function(){
+        bootwait.show();
         $("#divToEditUserModal").load("/editUserModal", function (res, status, req) {
             if (status == "success") {
+                bootwait.hide();
                 $("#editUserModal").modal('show');
 
                 var name = $("#userPanel > label").text();
@@ -245,11 +264,14 @@ var PoliticStatusScript = (function () {
     };
 
     getDonutChartModal = function(){
+        bootwait.show();
         getPoliticsMentionCountObject(function(politicsObject){
             if(politicsObject.length > 0){
+                bootwait.hide();
                 $("#donutChartModal").modal('show');
                 setChartValues();
             } else {
+                bootwait.hide();
                 toastr.warning("Ainda não foram contabilizados os tweets! Por favor, aguarde!");
             }
         });

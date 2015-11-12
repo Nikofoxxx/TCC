@@ -5,6 +5,7 @@ module.exports = function (app) {
     var dateToSearch = new Date().toISOString();
     var dateToCompare = new Date();
     var queryComments;
+    var isQuerying = false;
 
     var commentsIndex = 0;
 
@@ -12,6 +13,7 @@ module.exports = function (app) {
     {
         getUpdatedComments: function (client, user) {
             try {
+                isQuerying = true;
                 this.queryComments = setTimeout(function () {
 
                     Politics.getAllUserPolitics(user, function (politics) {
@@ -95,8 +97,17 @@ module.exports = function (app) {
             }
         },
 
-        clearQueryingCommentsTimeout: function(){
+        pauseCommentsQuery: function(){
+            isQuerying = false;
             clearTimeout(this.queryComments);
+        },
+
+        resumeCommentsQuery: function(client, user) {
+            if (!isQuerying) {
+                dateToSearch = new Date().toISOString();
+                dateToCompare = new Date();
+                this.getUpdatedComments(client, user);
+            }
         }
     };
     return SNDataController;

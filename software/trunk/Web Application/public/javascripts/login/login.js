@@ -71,8 +71,10 @@ var LoginScript = (function() {
 	};
 
 	getModalToRegister = function(){
+		bootwait.show();
 		$("#divToRegisterModal").load("/registerModal", function (res, status, req) {
 			if(status == "success"){
+				bootwait.hide();
 				$("#registerModal").modal('show');
 			}
 		});
