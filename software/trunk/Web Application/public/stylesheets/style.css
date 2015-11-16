@@ -223,3 +223,9 @@ footer .footer-center {
     text-align: center;
     font-size: 60px;
 }
+#right-container-list {
+    transform: rotate(180deg);
+}
+#right-container-list > iframe {
+    transform: rotate(-180deg);
+}

@@ -58,16 +58,26 @@ io.on('connection', function (client) {
 	var parsed_cookies = connect.utils.parseCookie(cookie_string);
 	var connect_sid = parsed_cookies['connect.sid'];
 	var sid = connect_sid.substr(2, connect_sid.indexOf(".") - 2);
+	var sessionUserName;
 
 	if (connect_sid) {
 		session_store.get(sid, function (error, session) {
 			console.log('O Cliente de ID ' + client.id + ' foi conectado!');
-			SNData.getUpdatedComments(client, session.user.userName);
+			sessionUserName = session.user.userName;
+			SNData.getUpdatedComments(client, sessionUserName);
 		});
 	}
 
+	client.on('pause', function() {
+		SNData.pauseCommentsQuery();
+	});
+
+	client.on('resume', function() {
+		SNData.resumeCommentsQuery(client, sessionUserName);
+	});
+
 	client.on('disconnect', function() {
-		SNData.clearQueryingCommentsTimeout();
+		SNData.pauseCommentsQuery();
 		console.log('O Cliente de ID ' + client.id + ' foi desconectado!');
 	});
 });

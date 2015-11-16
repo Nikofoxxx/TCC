@@ -100,15 +100,18 @@ var RegisterScript = (function() {
 				},
 
 				submitHandler: function() {
+					bootwait.show();
 			  		$.ajax({
 					    url: "/newUser",
 					    data: $("#newUserForm").serialize(),
 					    type: "POST",
 					    success: function(result) {
+							bootwait.hide();
 							toastr.success(result);
 							$("#registerModal").modal('toggle');
 					    },
 					    error: function(result){
+							bootwait.hide();
 					    	toastr.error(result.responseText);
 					    	clearUserFields(); 
 					    }

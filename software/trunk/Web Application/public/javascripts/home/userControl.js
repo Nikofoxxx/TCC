@@ -78,16 +78,19 @@ var userControl = (function () {
                 },
 
                 submitHandler: function() {
+                    bootwait.show();
                     $.ajax({
                         url: "/editUser",
                         data: $("#editUserForm").serialize(),
                         type: "POST",
                         success: function(result) {
+                            bootwait.hide();
                             handleNewUser(JSON.parse(result));
                             toastr.success("Usuario editado com sucesso!");
                             $("#editUserModal").modal('toggle');
                         },
                         error: function(result){
+                            bootwait.hide();
                             toastr.error(result.responseText);
                         }
                     });
